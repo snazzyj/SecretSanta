@@ -58,7 +58,6 @@ class CreatePool extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        // alert('Users entered: ' + JSON.stringify(this.state.users))
         const {users} = this.state
         this.context.setPool(users)
         this.props.history.push('/pairs')
