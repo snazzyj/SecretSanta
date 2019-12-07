@@ -17,7 +17,7 @@ class Pairs extends Component {
     render() {
 
         const { users } = this.context;     
-        const userList = users.map(obj => {
+        let userList = users.map(obj => {
             let newObject = {};
 
             Object.keys(obj).forEach(properyKey => {
@@ -26,7 +26,7 @@ class Pairs extends Component {
 
             return newObject;
         })
-        userList.map(obj => obj.pairName = "")
+        userList.map(obj => obj.pairName = "")     
         
         let poolOfNames = [];
 
@@ -54,11 +54,10 @@ class Pairs extends Component {
          console.log(right);
          console.log(poolOfNames);
 
-
         return (
             <section>
-                {poolOfNames.map(usr => (
-                    <li key={usr.id}>{usr.name} has: <span>{usr.pairName}</span></li>
+                {poolOfNames.map(user => (
+                    <li key={user.id}>{user.name} has: <span>{user.pairName}</span></li>
                     ))}
 
                     
