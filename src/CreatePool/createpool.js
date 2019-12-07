@@ -24,9 +24,9 @@ class CreatePool extends Component {
     createUI() {
         return this.state.users.map((el, i) => (
             <div key={i}>
-            <label htmlFor="name">Name{''}<Required /></label>
+            <label htmlFor="name"></label>
           <input name="name" onChange={this.handleInputChange.bind(this, i)}/>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email"></label>
           <input name="email" onChange={this.handleInputChange.bind(this, i)}/>
           <input type="button" value="Remove" onClick={this.removeField.bind(this,i)} />
             </div>
@@ -70,6 +70,11 @@ class CreatePool extends Component {
         <h1>Create Pool</h1>
 
         <form onSubmit={this.handleSubmit}>
+            <div>
+                <p>Name{''}<Required /></p>
+
+                <p>Email</p>
+            </div>
             {this.createUI()}
             <input type="button" value="Add More"onClick={this.addField.bind(this)} />
             <input type="submit" value="Submit" />

@@ -29,7 +29,6 @@ class Pairs extends Component {
         userList.map(obj => obj.pairName = "")     
         
         let poolOfNames = [];
-
         while(userList.length !== 0) {
             let randomIndex;
             randomIndex = Math.floor(Math.random() * userList.length);

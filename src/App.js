@@ -66,6 +66,8 @@ class App extends Component {
     ]
   };
 
+
+
   setPool = users => {
     this.setState({
       users
@@ -77,7 +79,7 @@ class App extends Component {
       users: this.state.users,
       setPool : this.setPool
     }
-
+    
     // console.log(this.state.users)
     return (
       <div className='App'>
