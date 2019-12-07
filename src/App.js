@@ -40,27 +40,27 @@ class App extends Component {
     },
     {
       id: 6,
-      name: "Test2",
+      name: "Test1",
       email: "null@null.com"
     },
     {
       id: 7,
-      name: "Test3",
+      name: "Test1",
       email: "null@null.com"
     },
     {
       id: 8,
-      name: "Test4",
+      name: "Test1",
       email: "null@null.com"
     },
     {
       id: 9,
-      name: "Test5",
+      name: "Test1",
       email: "null@null.com"
     },
     {
       id: 10,
-      name: "Test6",
+      name: "Test1",
       email: "null@null.com"
     }
     ]
