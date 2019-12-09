@@ -5,7 +5,7 @@ import './App.css';
 import CreatePool from './CreatePool/createpool';
 import SignUp from './Signup/signup';
 import Profile from './Profile/profile';
-import HomePage from './HomePage/homepage';
+import NavBar from './HomePage/navbar';
 import Pairs from './Pairings/pairs';
 import SecretSantaContext from './SecretSantaContext';
 
@@ -35,20 +35,12 @@ class App extends Component {
 
         <SecretSantaContext.Provider value={contextValue}>
 
-          <nav className="App__Nav">
-            <Link to="/">Secret Santa</Link>
-            <span> </span>
-            <Link to="/create">Create a Pool</Link>
-            <span> </span>
-            <Link to="/profile">Profile</Link>
-            <span> </span>
-            <Link to="/login">Login</Link>
-          </nav>
+          <NavBar />
 
           <main>
 
             <Switch>
-              <Route exact path="/" component={HomePage} />
+              <Route exact path="/" component={NavBar} />
               <Route exact path="/create" component={CreatePool} />
               <Route exact path="/pairs" component={Pairs} />
               <Route exact path="/signup" component={SignUp} />
