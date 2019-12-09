@@ -15,8 +15,6 @@ class App extends Component {
     users: []
   };
 
-
-
   setPool = users => {
     this.setState({
       users
@@ -26,9 +24,9 @@ class App extends Component {
   render() {
     const contextValue = {
       users: this.state.users,
-      setPool : this.setPool
+      setPool: this.setPool
     }
-    
+
     console.log(this.state.users)
     return (
       <div className='App'>
@@ -38,9 +36,7 @@ class App extends Component {
           <NavBar />
 
           <main>
-
             <Switch>
-              <Route exact path="/" component={NavBar} />
               <Route exact path="/create" component={CreatePool} />
               <Route exact path="/pairs" component={Pairs} />
               <Route exact path="/signup" component={SignUp} />
