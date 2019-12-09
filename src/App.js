@@ -12,58 +12,7 @@ import SecretSantaContext from './SecretSantaContext';
 class App extends Component {
 
   state = {
-    users: [
-    {
-      id: 1,
-      name: "Alex",
-      email: "silentx.alex@gmail.com"
-    },
-    {
-      id: 2,
-      name: "Leyna",
-      email: "lmf@gmail.com"
-    },
-    {
-      id: 3,
-      name: "Robin",
-      email: "ex@gmail.com"
-    },
-    {
-      id: 4,
-      name: "Nick",
-      email: "biteme@gmail.com"
-    },
-    {
-      id: 5,
-      name: "Test1",
-      email: "null@null.com"
-    },
-    {
-      id: 6,
-      name: "Test2",
-      email: "null@null.com"
-    },
-    {
-      id: 7,
-      name: "Test3",
-      email: "null@null.com"
-    },
-    {
-      id: 8,
-      name: "Test4",
-      email: "null@null.com"
-    },
-    {
-      id: 9,
-      name: "Test5",
-      email: "null@null.com"
-    },
-    {
-      id: 10,
-      name: "Test6",
-      email: "null@null.com"
-    }
-    ]
+    users: []
   };
 
 
@@ -80,7 +29,7 @@ class App extends Component {
       setPool : this.setPool
     }
     
-    // console.log(this.state.users)
+    console.log(this.state.users)
     return (
       <div className='App'>
 

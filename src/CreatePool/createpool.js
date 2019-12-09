@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import SecretSantaContext from '../SecretSantaContext';
+const uuid = require('uuid/v4')
 
 const Required = () => (
     <span className='AddBookmark__required'>*</span>
@@ -14,7 +15,8 @@ class CreatePool extends Component {
         this.state = {
             users: [{
                 name: "",
-                email: ""
+                email: "",
+                id: uuid()
             }]
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,8 +24,8 @@ class CreatePool extends Component {
 
 
     createUI() {
-        return this.state.users.map((el, i) => (
-            <div key={i}>
+        return this.state.users.map((_, i) => (
+            <div key={i}>{i}
             <label htmlFor="name"></label>
           <input name="name" onChange={this.handleInputChange.bind(this, i)}/>
           <label htmlFor="email"></label>
@@ -50,7 +52,7 @@ class CreatePool extends Component {
     handleInputChange(i, e) {
         const {name, value} = e.target;
         let users =[...this.state.users];
-        users[i] = {...users[i], [name] : value};
+        users[i] = {...users[i], [name] : value, id: uuid()};
         this.setState({
             users
         })
