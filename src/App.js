@@ -7,12 +7,20 @@ import SignUp from './Signup/signup';
 import Profile from './Profile/profile';
 import NavBar from './HomePage/navbar';
 import Pairs from './Pairings/pairs';
+import Login from './Login/login';
 import SecretSantaContext from './SecretSantaContext';
 
 class App extends Component {
 
   state = {
-    users: []
+    users: [],
+    user: {
+      email: '',
+      password: '',
+      id: '',
+      isAdmin: false,
+      isLoggedIn: false,
+    }
   };
 
   setPool = users => {
@@ -21,10 +29,22 @@ class App extends Component {
     })
   }
 
+  setUserLogin = user => {
+    this.setState({
+      user: {
+        email: user.email,
+        password: user.password,
+        isLoggedIn: user.isLoggedIn,
+        isAdmin: user.admin
+      }
+    })
+  }
+
   render() {
     const contextValue = {
       users: this.state.users,
-      setPool: this.setPool
+      setPool: this.setPool,
+      setUserLogin: this.setUserLogin
     }
 
     console.log(this.state.users)
@@ -38,9 +58,10 @@ class App extends Component {
           <main>
             <Switch>
               <Route exact path="/create" component={CreatePool} />
-              <Route exact path="/pairs" component={Pairs} />
-              <Route exact path="/signup" component={SignUp} />
-              <Route exact path="/profile" component={Profile} />
+              <Route path="/pairs" component={Pairs} />
+              <Route path="/signup" component={SignUp} />
+              <Route path="/profile" component={Profile} />
+              <Route path="/login" component={Login} />
             </Switch>
           </main>
 

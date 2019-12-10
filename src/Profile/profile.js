@@ -2,7 +2,12 @@ import React, {Component} from 'react';
 
 class Profile extends Component {
 
+    //change event per field
+    //onsubmit for form
+    //eslint_ignore
+
     render() {
+
         return (
             <section>
                 <h1>Profile</h1>
@@ -13,13 +18,6 @@ class Profile extends Component {
 
                     <button>Add</button>
                 </form>
-
-                <ul>
-                    <h3>Interests</h3>
-                    <li>Candles</li>
-                    <li>Books</li>
-                    <li>Dice</li>
-                </ul>
 
                 <h3>Current Partner</h3>
                 <a href="#">Partner's Name</a>

@@ -12,6 +12,9 @@ class Pairs extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         console.log('Submited')
+
+        //fetch
+        //post req
     }
 
     render() {
@@ -27,6 +30,7 @@ class Pairs extends Component {
             return newObject;
         })
         userList.map(obj => obj.pairName = "")
+        userList.map(obj => obj.pairId = "")
 
         let poolOfNames = [];
         while (userList.length !== 0) {
@@ -47,6 +51,7 @@ class Pairs extends Component {
             poolOfNames
                 .find(user => leftItem.id === user.id)
                 .pairName = rightCopy[randomIndex].name
+                .pairId = rightCopy[randomIndex].id
 
                 rightCopy.splice(randomIndex, 1)
         })

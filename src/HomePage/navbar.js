@@ -13,6 +13,7 @@ class NavBar extends Component {
                 <Link to="/signup">Sign Up</Link>
                 <span> </span>
                 <Link to="/profile">Profile</Link>
+
             </nav>
         )
     }

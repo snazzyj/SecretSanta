@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
+import Login from '../Login/login';
 
 const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
 const validPasswordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
@@ -77,7 +79,7 @@ class SignUp extends Component {
         //     password: password.value
         // }
 
-        this.props.history.push('/')
+        this.props.history.push('/login')
         //email + password validator before posting
     }
 
@@ -86,6 +88,9 @@ class SignUp extends Component {
         const { errors } = this.state;
         return (
             <div>
+
+                <p>Already have an account? <Link to="/login">Login</Link></p>
+
                 <h1>Sign up</h1>
 
                 <form onSubmit={this.handleSubmit}>
