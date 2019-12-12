@@ -5,7 +5,7 @@ import './App.css';
 import CreatePool from './CreatePool/createpool';
 import SignUp from './Signup/signup';
 import Profile from './Profile/profile';
-import NavBar from './HomePage/navbar';
+import NavBar from './Nav/navbar';
 import Pairs from './Pairings/pairs';
 import Login from './Login/login';
 import SecretSantaContext from './SecretSantaContext';

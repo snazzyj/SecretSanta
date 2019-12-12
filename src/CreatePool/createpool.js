@@ -25,6 +25,7 @@ class CreatePool extends Component {
 
     createUI() {
         return this.state.users.map((_, i) => (
+            i = 1 + i,
             <div key={i}>{i}
             <label htmlFor="name"></label>
           <input name="name" onChange={this.handleInputChange.bind(this, i)}/>
@@ -61,6 +62,7 @@ class CreatePool extends Component {
     handleSubmit(event) {
         event.preventDefault();
         const {users} = this.state
+
         this.context.setPool(users)
         this.props.history.push('/pairs')
     }
