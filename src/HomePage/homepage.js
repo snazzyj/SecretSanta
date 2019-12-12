@@ -5,7 +5,10 @@ class Homepage extends Component {
 
     render() {
         return (
-            <p>Hello World!</p>
+            <section>
+            <Link to="/create">Create a Pool</Link>
+            <Link to="/signup">Sign Up</Link>
+            </section>
         )
     }
 

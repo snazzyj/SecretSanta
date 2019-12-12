@@ -10,9 +10,9 @@ class NavBar extends Component {
                 <span> </span>
                 <Link to="/create">Create a Pool</Link>
                 <span> </span>
-                <Link to="/login">Login</Link>
-                <span> </span>
                 <Link to="/profile">Profile</Link>
+                <span> </span>
+                <Link to="/login">Login</Link>
 
             </nav>
         )
