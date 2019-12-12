@@ -8,6 +8,7 @@ import Profile from './Profile/profile';
 import NavBar from './Nav/navbar';
 import Pairs from './Pairings/pairs';
 import Login from './Login/login';
+import Homepage from './HomePage/homepage'
 import SecretSantaContext from './SecretSantaContext';
 
 class App extends Component {
@@ -57,7 +58,8 @@ class App extends Component {
 
           <main>
             <Switch>
-              <Route exact path="/create" component={CreatePool} />
+              <Route exact path="/" component={Homepage} />
+              <Route path="/create" component={CreatePool} />
               <Route path="/pairs" component={Pairs} />
               <Route path="/signup" component={SignUp} />
               <Route path="/profile" component={Profile} />

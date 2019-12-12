@@ -17,6 +17,54 @@ class Pairs extends Component {
         //post req
     }
 
+    shuffle = (array) => {
+        let poolOfNames = [];
+        while (array.length !== 0) {
+            let randomIndex;
+            randomIndex = Math.floor(Math.random() * array.length);
+            poolOfNames.push(array[randomIndex]);
+            array.splice(randomIndex, 1);
+        }
+
+        this.getPairings(poolOfNames);
+
+        return poolOfNames;
+
+    }
+
+    getPairings = (array) => {
+        let pool = [...array];
+        let left = array.slice(0, array.length / 2);
+        let right = array.slice(Math.ceil(array.length / 2));
+        let leftCopy = [...left];
+        let rightCopy = [...right];
+
+        left.forEach((leftItem) => {
+            let randomIndex;
+            randomIndex = Math.floor(Math.random() * rightCopy.length)
+
+            pool
+                .find(user => leftItem.id === user.id)
+                .pairName = rightCopy[randomIndex].name
+            
+                rightCopy.splice(randomIndex, 1)
+        })
+
+        right.forEach((rightItem) => {
+            let randomIndex;
+            randomIndex = Math.floor(Math.random() * leftCopy.length)
+
+            pool
+                .find(user => rightItem.id === user.id)
+                .pairName = leftCopy[randomIndex].name
+            
+                leftCopy.splice(randomIndex, 1)
+        })
+
+        let res = left.concat(right);
+        return res;
+    }
+
     render() {
 
         const { users } = this.context;
@@ -30,47 +78,13 @@ class Pairs extends Component {
             return newObject;
         })
         userList.map(obj => obj.pairName = "")
-
-        let poolOfNames = [];
-        while (userList.length !== 0) {
-            let randomIndex;
-            randomIndex = Math.floor(Math.random() * userList.length);
-            poolOfNames.push(userList[randomIndex]);
-            userList.splice(randomIndex, 1);
-        }
-        let left = poolOfNames.slice(0, poolOfNames.length / 2);
-        let right = poolOfNames.slice(Math.ceil(poolOfNames.length / 2))
-
-        let rightCopy = [...right];
-        let leftCopy = [...left];
-
-        left.forEach((leftItem) => {
-            let randomIndex;
-            randomIndex = Math.floor(Math.random() * rightCopy.length)
-            poolOfNames
-                .find(user => leftItem.id === user.id)
-                .pairName = rightCopy[randomIndex].name
-
-                rightCopy.splice(randomIndex, 1)
-        })
-
-        right.forEach((rightItem) => {
-            let randomIndex;
-            randomIndex = Math.floor(Math.random() * leftCopy.length)
-            poolOfNames
-                .find(user => rightItem.id === user.id)
-                .pairName = leftCopy[randomIndex].name
-
-                leftCopy.splice(randomIndex, 1)
-        })
-
-        console.log(left);
-        console.log(right);
-        console.log(poolOfNames);
+        console.log(userList)
+        let poolList = this.shuffle(userList);
+        console.log(poolList)
 
         return (
             <section>
-                {poolOfNames.map((user) => (
+                {poolList.map((user) => (
                     <li key={user.id}>{user.name} has: <span>{user.pairName}</span></li>
                 ))}
 

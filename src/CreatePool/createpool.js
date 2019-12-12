@@ -62,7 +62,7 @@ class CreatePool extends Component {
     handleSubmit(event) {
         event.preventDefault();
         const {users} = this.state
-
+        users.splice(0,1)
         this.context.setPool(users)
         this.props.history.push('/pairs')
     }
