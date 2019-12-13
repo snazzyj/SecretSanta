@@ -5,7 +5,8 @@ const SecretSantaContext = React.createContext({
     user: {},
     setPool: () => {},
     setUserLogin: () => {},
-    addUserInterest: () => {}
+    addUserInterest: () => {},
+    removeUserInterest: () => {}
 })
 
 export default SecretSantaContext

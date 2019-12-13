@@ -11,13 +11,11 @@ class Profile extends Component {
             //allInterests, //needed for autocomplete later    
             addUserInterest,
             removeUserInterest,
-            user
+            // user
         } = this.context
 
         const {userInterests} = this.context.user;
         console.log(userInterests);
-        console.log(this.context.user.userInterests);
-
 
         return (
             <section>
@@ -35,7 +33,7 @@ class Profile extends Component {
                     {userInterests.map( (interest, i) => (
                         <li key={`${interest}${i}`}>
                             {interest}
-                            <a href="#" onClick={(e) => {
+                            <a href="/" onClick={(e) => {
                                 e.preventDefault();
                                 removeUserInterest(interest);
                             }}>(X)</a>
@@ -44,7 +42,7 @@ class Profile extends Component {
                 </ul>
 
                 <h3>Current Partner</h3>
-                <a href="#">Partner's Name</a>
+                <a href="/">Partner's Name</a>
 
             </section>
 

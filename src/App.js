@@ -19,7 +19,7 @@ class App extends Component {
       password: '',
       id: 1,
       isLoggedIn: false,
-      userInterests: []
+      userInterests: ['socks', 'chocolate', 'candles']
     }
   };
 
@@ -39,8 +39,25 @@ class App extends Component {
     })
   }
 
-  addUserInterest = (interest) => {
+  addUserInterest = interest => {
+    // let userInterest = this.state.user.userInterests;
+    // userInterest.push(interest)
+    // userInterest.concat(interest)
+    // this.setState({
+    //   user: userInterest
+    // })
+    this.setState({
+      user: this.state.user.userInterests.concat(interest)
+    })
+  }
 
+  removeUserInterest = interest => {
+    let copy = [...this.state.user.userInterests];
+    copy.slice(interest, 1);
+
+    this.setState({
+      user: copy
+    })
   }
 
   render() {
@@ -49,12 +66,12 @@ class App extends Component {
       user: this.state.user,
       setPool: this.setPool,
       setUserLogin: this.setUserLogin,
-      addUserInterest: this.addUserInterest
+      addUserInterest: this.addUserInterest,
+      removeUserInterest: this.removeUserInterest
     }
 
     console.log(this.state.user.userInterests)
 
-    console.log(this.state.users)
     return (
       <div className='App'>
 
@@ -68,7 +85,7 @@ class App extends Component {
               <Route path="/create" component={CreatePool} />
               <Route path="/pairs" component={Pairs} />
               <Route path="/signup" component={SignUp} />
-              <Route path="/profile" component={Profile} />
+              <Route path="/profile/:userId" component={Profile} />
               <Route path="/login" component={Login} />
             </Switch>
           </main>
