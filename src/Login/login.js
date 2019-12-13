@@ -13,7 +13,6 @@ class Login extends Component {
         const user = {
             email: email.value, 
             password : password.value, 
-            isLoggedIn: true
         }
 
         this.context.setUserLogin(user)

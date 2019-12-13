@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import CreatePool from './CreatePool/createpool';
@@ -18,9 +17,9 @@ class App extends Component {
     user: {
       email: '',
       password: '',
-      id: '',
-      isAdmin: false,
+      id: 1,
       isLoggedIn: false,
+      userInterests: []
     }
   };
 
@@ -35,18 +34,25 @@ class App extends Component {
       user: {
         email: user.email,
         password: user.password,
-        isLoggedIn: user.isLoggedIn,
-        isAdmin: user.admin
+        isLoggedIn: true
       }
     })
+  }
+
+  addUserInterest = (interest) => {
+
   }
 
   render() {
     const contextValue = {
       users: this.state.users,
+      user: this.state.user,
       setPool: this.setPool,
-      setUserLogin: this.setUserLogin
+      setUserLogin: this.setUserLogin,
+      addUserInterest: this.addUserInterest
     }
+
+    console.log(this.state.user.userInterests)
 
     console.log(this.state.users)
     return (
