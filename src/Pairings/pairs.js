@@ -25,44 +25,7 @@ class Pairs extends Component {
             poolOfNames.push(array[randomIndex]);
             array.splice(randomIndex, 1);
         }
-
-        this.getPairings(poolOfNames);
-
         return poolOfNames;
-
-    }
-
-    getPairings = (array) => {
-        let pool = [...array];
-        let left = array.slice(0, array.length / 2);
-        let right = array.slice(Math.ceil(array.length / 2));
-        let leftCopy = [...left];
-        let rightCopy = [...right];
-
-        left.forEach((leftItem) => {
-            let randomIndex;
-            randomIndex = Math.floor(Math.random() * rightCopy.length)
-
-            pool
-                .find(user => leftItem.id === user.id)
-                .pairName = rightCopy[randomIndex].name
-            
-                rightCopy.splice(randomIndex, 1)
-        })
-
-        right.forEach((rightItem) => {
-            let randomIndex;
-            randomIndex = Math.floor(Math.random() * leftCopy.length)
-
-            pool
-                .find(user => rightItem.id === user.id)
-                .pairName = leftCopy[randomIndex].name
-            
-                leftCopy.splice(randomIndex, 1)
-        })
-
-        let res = left.concat(right);
-        return res;
     }
 
     render() {
@@ -78,13 +41,27 @@ class Pairs extends Component {
             return newObject;
         })
         userList.map(obj => obj.pairName = "")
-        console.log(userList)
-        let poolList = this.shuffle(userList);
-        console.log(poolList)
+
+        let poolOfNames = this.shuffle(userList);
+        
+        let left = poolOfNames.slice(0, poolOfNames.length / 2)
+        let right = poolOfNames.slice(Math.ceil(poolOfNames.length / 2))
+
+        left.forEach((leftItem, i) => {
+            let rightItem = right[i]
+            let leftUser = poolOfNames
+                .find(user => leftItem.id === user.id)
+
+            let rightUser = poolOfNames
+                .find(user => rightItem.id === user.id)
+            
+            leftUser.pairName = rightUser.name;
+            rightUser.pairName = leftUser.name;
+        })
 
         return (
             <section>
-                {poolList.map((user) => (
+                {poolOfNames.map((user) => (
                     <li key={user.id}>{user.name} has: <span>{user.pairName}</span></li>
                 ))}
 
