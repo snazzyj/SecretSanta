@@ -20,7 +20,7 @@ class App extends Component {
       password: '',
       id: 1,
       isLoggedIn: false,
-      userInterests: ['socks', 'chocolate', 'candles']
+      userInterests: []
     }
   };
 

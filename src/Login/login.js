@@ -28,11 +28,7 @@ class Login extends Component {
             this.setState({
                 error: 'Invalid Email or Password'
             })
-        }
-
-
-
-        
+        }       
 
     }
 

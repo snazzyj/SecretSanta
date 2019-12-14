@@ -22,7 +22,6 @@ class CreatePool extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-
     createUI() {
         return this.state.users.map((_, i) => (
             i = 1 + i,

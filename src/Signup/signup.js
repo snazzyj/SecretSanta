@@ -70,16 +70,7 @@ class SignUp extends Component {
         } else {
             console.log('Invalid Form')
         }
-
-        // const { name, email, password } = e.target;
-        // const user = {
-        //     name: name.value,
-        //     email: email.value,
-        //     password: password.value
-        // }
-
         this.props.history.push('/login')
-        //email + password validator before posting
     }
 
 
