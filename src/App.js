@@ -15,6 +15,7 @@ class App extends Component {
   state = {
     users: [],
     user: {
+      name: '',
       email: '',
       password: '',
       id: 1,
@@ -32,9 +33,12 @@ class App extends Component {
   setUserLogin = user => {
     this.setState({
       user: {
+        name: 'Foo Bar',
         email: user.email,
         password: user.password,
-        isLoggedIn: true
+        isLoggedIn: true,
+        id: 1,
+        userInterests: []
       }
     })
   }
@@ -46,17 +50,23 @@ class App extends Component {
     // this.setState({
     //   user: userInterest
     // })
+    console.log(interest)
     this.setState({
-      user: this.state.user.userInterests.concat(interest)
+      user: {
+      userInterests: this.state.user.userInterests.concat(interest),
+      ...this.state.user
+    }
     })
+
+    
   }
 
   removeUserInterest = interest => {
     let copy = [...this.state.user.userInterests];
-    copy.slice(interest, 1);
+    copy.splice(interest, 1);
 
     this.setState({
-      user: copy
+      user: {userInterests: copy, ...this.state.user}
     })
   }
 
@@ -70,7 +80,7 @@ class App extends Component {
       removeUserInterest: this.removeUserInterest
     }
 
-    console.log(this.state.user.userInterests)
+    console.log(this.state.user)
 
     return (
       <div className='App'>

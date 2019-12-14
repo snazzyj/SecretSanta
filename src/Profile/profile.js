@@ -5,6 +5,10 @@ class Profile extends Component {
 
     static contextType = SecretSantaContext;
 
+    handleAddInterest = (e) => {
+        e.preventDefault();
+    }
+
     render() {
 
         const {
@@ -13,6 +17,8 @@ class Profile extends Component {
             removeUserInterest,
             // user
         } = this.context
+
+        
 
         const {userInterests} = this.context.user;
         console.log(userInterests);
@@ -25,12 +31,12 @@ class Profile extends Component {
                     <label>Add Interests</label>
                     <input ref={HTMLInputElement => this.input = HTMLInputElement}/>
 
-                    <button onClick={(e) => addUserInterest(this.input.value)}>Add</button>
+                    <button onClick={(e) => {this.handleAddInterest(e); addUserInterest( this.input.value)}}>Add</button>
                 </form>
 
                 <h3>Interests</h3>
                 <ul>
-                    {userInterests.map( (interest, i) => (
+                    {this.context.user.userInterests.map( (interest, i) => (
                         <li key={`${interest}${i}`}>
                             {interest}
                             <a href="/" onClick={(e) => {

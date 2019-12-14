@@ -3,6 +3,12 @@ import SecretSantaContext from '../SecretSantaContext';
 
 class Login extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            error: ''
+        }
+    }
     static contextType = SecretSantaContext;
 
     handleSubmit = (e) => {
@@ -15,7 +21,17 @@ class Login extends Component {
             password : password.value, 
         }
 
-        this.context.setUserLogin(user)
+        if(user.email === 'test@example.com' && user.password === 'password') {
+            this.context.setUserLogin(user);
+            this.props.history.push('/')
+        } else {
+            this.setState({
+                error: 'Invalid Email or Password'
+            })
+        }
+
+
+
         
 
     }
@@ -34,7 +50,7 @@ class Login extends Component {
 
                     <button type="submit">Submit</button>
                 </form>
-
+                {this.state.error}
             </div>
         )
     }
