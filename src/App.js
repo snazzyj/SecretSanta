@@ -44,17 +44,10 @@ class App extends Component {
   }
 
   addUserInterest = interest => {
-    // let userInterest = this.state.user.userInterests;
-    // userInterest.push(interest)
-    // userInterest.concat(interest)
-    // this.setState({
-    //   user: userInterest
-    // })
-    console.log(interest)
     this.setState({
       user: {
-      userInterests: this.state.user.userInterests.concat(interest),
-      ...this.state.user
+      ...this.state.user,
+      userInterests: this.state.user.userInterests.concat(interest)
     }
     })
 
@@ -62,11 +55,13 @@ class App extends Component {
   }
 
   removeUserInterest = interest => {
-    let copy = [...this.state.user.userInterests];
-    copy.splice(interest, 1);
-
     this.setState({
-      user: {userInterests: copy, ...this.state.user}
+      user: {
+        ...this.state.user,
+        userInterests: this.state.user.userInterests.filter( (item) => {
+          return item !== interest
+        } )
+      }
     })
   }
 
