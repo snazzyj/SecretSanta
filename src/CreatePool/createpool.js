@@ -18,7 +18,8 @@ class CreatePool extends Component {
                 name: "",
                 email: "",
                 id: uuid()
-            }]
+            }],
+            pool_name: ''
         };
     }
 
@@ -58,12 +59,34 @@ class CreatePool extends Component {
         })
     }
 
+    handlePoolName = e => {
+        this.setState({
+            pool_name: e.target.value
+        })
+    }
+
     handleSubmit = (event) => {
         event.preventDefault();
-        const {users} = this.state
+        const {users, pool_name} = this.state
         users.splice(0,1)
-        this.context.setPool(users)
-        this.props.history.push('/pairs')
+
+        fetch(`${config.API_ENDPOINT}/pools`, {
+            method: 'POST',
+            headers: {
+                'content-type' : 'application/json'
+            },
+            body: JSON.stringify(pool_name)
+        })
+        .then(res => {
+            (!res.ok)
+                ? res.json().then(e => Promise.reject(e))
+                : res.json()
+        })
+        .then(data => {
+            this.context.setPool(users)
+            this.props.history.push('/pairs')
+        })
+            
     }
 
     render() {
@@ -73,6 +96,8 @@ class CreatePool extends Component {
         <h1>Create Pool</h1>
 
         <form onSubmit={this.handleSubmit}>
+            <label htmlFor="Pool__Name">Pool Name</label>
+            <input type="text" onChange={e => this.handlePoolName(e)}/>
             <div>
                 <p>Name{''}<Required /></p>
 
