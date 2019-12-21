@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import SecretSantaContext from '../SecretSantaContext';
+import config from '../config';
 const uuid = require('uuid/v4')
 
 const Required = () => (
@@ -19,29 +20,28 @@ class CreatePool extends Component {
                 id: uuid()
             }]
         };
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    createUI() {
+    createUI = () => {
         return this.state.users.map((_, i) => (
             i = 1 + i,
             <div key={i}>{i}
             <label htmlFor="name"></label>
-          <input name="name" onChange={this.handleInputChange.bind(this, i)}/>
+          <input name="name" onChange={(e) => this.handleInputChange(i,e)}/>
           <label htmlFor="email"></label>
-          <input name="email" onChange={this.handleInputChange.bind(this, i)}/>
-          <input type="button" value="Remove" onClick={this.removeField.bind(this,i)} />
+          <input name="email" onChange={(e) => this.handleInputChange(i,e)}/>
+          <input type="button" value="Remove" onClick={(i) => this.removeField(i)} />
             </div>
         ))
     };
 
-    addField() {
+    addField = () => {
         this.setState(prevState => ({
             users: [...prevState.users, {name: "", email:""}]
         }))
     }
 
-    removeField(i) {
+    removeField = (i) => {
         let users = [...this.state.users];
         users.splice(i, 1)
         this.setState({
@@ -49,7 +49,7 @@ class CreatePool extends Component {
         })
     }
 
-    handleInputChange(i, e) {
+    handleInputChange = (i, e) => {
         const {name, value} = e.target;
         let users =[...this.state.users];
         users[i] = {...users[i], [name] : value, id: uuid()};
@@ -58,7 +58,7 @@ class CreatePool extends Component {
         })
     }
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         event.preventDefault();
         const {users} = this.state
         users.splice(0,1)
@@ -79,8 +79,8 @@ class CreatePool extends Component {
                 <p>Email</p>
             </div>
             {this.createUI()}
-            <input type="button" value="Add More"onClick={this.addField.bind(this)} />
-            <input type="submit" value="Submit" />
+            <input type="button" value="Add More"onClick={() => this.addField()} />
+            <input type="submit" value="Get Pairs" />
         </form>
       </div>
       )}

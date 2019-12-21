@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import SecretSantaContext from '../SecretSantaContext';
+import config from '../config';
 
 class Profile extends Component {
 
