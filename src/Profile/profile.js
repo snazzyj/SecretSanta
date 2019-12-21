@@ -4,7 +4,37 @@ import config from '../config';
 
 class Profile extends Component {
 
+    state = {
+        error: null,
+        giftee: '',
+    }
+
     static contextType = SecretSantaContext;
+
+    componentDidMount() {
+        const {id} = this.context.user
+        const url = config.API_ENDPOINT + `/users/${id}`
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'content-type' : 'application/json'
+            }
+        })
+        .then(res => {
+            if (!res.ok) {
+                throw new Error(res.status)
+            }
+            return res.json()
+        })
+        .then(data => {
+            console.log(data)
+            this.context.user(data)
+        })
+        .catch(error => this.setState({
+            error
+        }))
+    }
 
     handleAddInterest = (e) => {
         e.preventDefault();
@@ -22,7 +52,6 @@ class Profile extends Component {
         
 
         const {userInterests} = this.context.user;
-        console.log(userInterests);
 
         return (
             <section>

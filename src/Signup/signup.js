@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import config from '../config';
+import AuthApiService from '../services/auth-api-service';
 
 const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i); // eslint-disable-line
 const validPasswordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
@@ -14,6 +15,10 @@ const validateForm = (errors) => {
 
 class SignUp extends Component {
 
+    static defaultProps = {
+        onRegistrationSuccess: () => {}
+    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -23,7 +28,8 @@ class SignUp extends Component {
             errors: {
                 email: '',
                 password: ''
-            }
+            },
+            error: null,
         };
     }
 
@@ -65,13 +71,31 @@ class SignUp extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Submitted!')
-        if (validateForm(this.state.errors)) {
-            console.log('Valid info')
-        } else {
-            console.log('Invalid Form')
-        }
-        this.props.history.push('/login')
+
+        const {name, email, password} = e.target
+
+        this.setState({
+            error: null
+        });
+
+        AuthApiService.postUser({
+            name: name.value,
+            email: email.value,
+            password: password.value
+        })
+        .then(user => {
+            name.value = ''
+            email.value = ''
+            password.val = ''
+            // this.props.onRegistrationSuccess()
+            this.history.props.push('/login')
+        })
+        .catch(res => {
+            this.setState({
+                error: res.error
+            });
+        })
+
     }
 
 

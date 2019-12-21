@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import SecretSantaContext from '../SecretSantaContext';
 import config from '../config';
+import AuthApiService from '../services/auth-api-service';
+import TokenService from '../services/token-service';
 
 class Login extends Component {
 
@@ -16,20 +18,25 @@ class Login extends Component {
         e.preventDefault();
 
         const {email, password} = e.target;
+        console.log(email.value)
 
-        const user = {
-            email: email.value, 
-            password : password.value, 
-        }
-
-        if(user.email === 'test@example.com' && user.password === 'password') {
-            this.context.setUserLogin(user);
-            this.props.history.push('/')
-        } else {
+        AuthApiService.postLogin({
+            email: email.value,
+            password: password.value
+        })
+        .then(res => {
+            console.log(res)
+            email.value = '';
+            password.value = '';
+            TokenService.saveAuthToken(res.authToken)
+            this.history.push('/')
+        })
+        .catch(res => {
             this.setState({
-                error: 'Invalid Email or Password'
+                error: res.error
             })
-        }       
+        })
+  
 
     }
 

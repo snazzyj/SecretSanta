@@ -18,7 +18,7 @@ class App extends Component {
       name: '',
       email: '',
       password: '',
-      id: 1,
+      id: null,
       isLoggedIn: false,
       userInterests: []
     }
@@ -33,11 +33,11 @@ class App extends Component {
   setUserLogin = user => {
     this.setState({
       user: {
-        name: 'Foo Bar',
+        name: user.name,
         email: user.email,
         password: user.password,
         isLoggedIn: true,
-        id: 1,
+        id: user.id,
         userInterests: []
       }
     })
