@@ -17,7 +17,7 @@ class CreatePool extends Component {
             users: [{
                 name: "",
                 email: "",
-                id: uuid()
+                id: null,
             }],
             pool_name: '',
             error: null
@@ -37,7 +37,7 @@ class CreatePool extends Component {
         ))
     };
 
-    addField = () => {
+    addField = () => {        
         this.setState(prevState => ({
             users: [...prevState.users, {name: "", email:""}]
         }))
@@ -70,34 +70,9 @@ class CreatePool extends Component {
         event.preventDefault();
         const {users, pool_name} = this.state
         users.splice(0,1)
-        const admin_email = this.context.user.email;
-
-        fetch(`${config.API_ENDPOINT}/pools`, {
-            method: 'POST',
-            headers: {
-                'content-type' : 'application/json'
-            },
-            body: JSON.stringify({
-                admin_email: admin_email,
-                pool_name : pool_name
-            })
-        })
-        .then(res => {
-            (!res.ok)
-                ? res.json().then(e => Promise.reject(e))
-                : res.json()
-            
-        })
-        .then(data => {
-            this.context.setPool(users)
-            this.props.history.push('/pairs')
-        })
-        .catch(res => {
-            this.setState({
-                error: res.error
-            })
-        })
-            
+        this.context.setPool(users)
+        this.context.addPoolName(pool_name)
+        this.props.history.push('/pairs')
     }
 
     render() {
