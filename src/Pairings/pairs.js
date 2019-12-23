@@ -2,17 +2,26 @@ import React, { Component } from 'react';
 import SecretSantaContext from '../SecretSantaContext';
 import config from '../config';
 
+
+
 class Pairs extends Component {
 
     static defaultProps = {
         users: []
     }
-
     static contextType = SecretSantaContext;
+
+    state = {
+        pool: [],
+        pool_id: null,
+        error: null
+    }
+
 
     handleSubmit = (event) => {
         event.preventDefault();
         console.log('Submited')
+
 
         //fetch
         //post req

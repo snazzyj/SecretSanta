@@ -16,7 +16,7 @@ class App extends Component {
     users: [],
     user: {
       name: '',
-      email: '',
+      email: 'silentx.alex@gmail.com',
       password: '',
       id: null,
       isLoggedIn: false,
