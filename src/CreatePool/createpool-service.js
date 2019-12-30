@@ -46,8 +46,8 @@ const CreatePoolService = {
                 return res.json()
             })
             .then(data => {
-                console.log(data)
-                return data;
+                let id = data.pool_id
+                return id;
             })
     },
 
