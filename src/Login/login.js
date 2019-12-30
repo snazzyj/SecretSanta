@@ -35,6 +35,8 @@ class Login extends Component {
                 error: res.error
             })
         })
+
+        //UserService.getUser()
   
 
     }

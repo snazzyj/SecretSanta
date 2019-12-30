@@ -17,10 +17,11 @@ class App extends Component {
     user: {
       name: '',
       email: 'silentx.alex@gmail.com',
-      password: '',
       id: null,
       isLoggedIn: false,
-      userInterests: []
+      userInterests: [],
+      pool_name: '',
+      pool_id: null,
     }
   };
 
@@ -33,12 +34,29 @@ class App extends Component {
   setUserLogin = user => {
     this.setState({
       user: {
-        name: user.name,
+        // name: user.name,
         email: user.email,
-        password: user.password,
         isLoggedIn: true,
-        id: user.id,
-        userInterests: []
+        // id: user.id,
+        // userInterests: []
+      }
+    })
+  }
+  
+  // addPoolName = poolName => {
+  //   this.setState({
+  //     user: {
+  //       ...this.state.user,
+  //       pool_name: poolName
+  //     }
+  //   })
+  // }
+
+  setPoolId = pool_id => {
+    this.setState({
+      user: {
+        ...this.state.user,
+        pool_id
       }
     })
   }
@@ -50,8 +68,6 @@ class App extends Component {
       userInterests: this.state.user.userInterests.concat(interest)
     }
     })
-
-    
   }
 
   removeUserInterest = interest => {
@@ -72,7 +88,8 @@ class App extends Component {
       setPool: this.setPool,
       setUserLogin: this.setUserLogin,
       addUserInterest: this.addUserInterest,
-      removeUserInterest: this.removeUserInterest
+      removeUserInterest: this.removeUserInterest,
+      setPoolId: this.setPoolId
     }
 
     console.log(this.state.user)

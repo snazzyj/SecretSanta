@@ -1,11 +1,20 @@
 import React, {Component} from 'react';
 import SecretSantaContext from '../SecretSantaContext';
-import config from '../config';
-const uuid = require('uuid/v4')
+import CreatePoolService from './createpool-service';
 
 const Required = () => (
-    <span className='AddBookmark__required'>*</span>
+    <span className='required'>*</span>
   )
+
+async function postPoolData (users, pool_name, email) {
+    console.log({users})
+    console.log({pool_name})
+    console.log({email})
+    const postUsers = CreatePoolService.postUsers(users);
+    const postPool = CreatePoolService.postPool(pool_name, email);
+    return [postUsers, postPool]
+    // const postPairs = await CreatePoolService.postPairs(users, postPool.pool_id)
+}
 
 class CreatePool extends Component {
 
@@ -17,7 +26,6 @@ class CreatePool extends Component {
             users: [{
                 name: "",
                 email: "",
-                id: null,
             }],
             pool_name: '',
             error: null
@@ -54,7 +62,7 @@ class CreatePool extends Component {
     handleInputChange = (i, e) => {
         const {name, value} = e.target;
         let users =[...this.state.users];
-        users[i] = {...users[i], [name] : value, id: uuid()};
+        users[i] = {...users[i], [name] : value};
         this.setState({
             users
         })
@@ -69,13 +77,17 @@ class CreatePool extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         const {users, pool_name} = this.state
+        const {email} = this.context.user
         users.splice(0,1)
         this.context.setPool(users)
-        this.context.addPoolName(pool_name)
-        this.props.history.push('/pairs')
-    }
 
+        postPoolData(users, pool_name, email)
+        console.log({postData})
+
+    }
+    
     render() {
+        const {users} = this.state;
         return(
         <div>
 

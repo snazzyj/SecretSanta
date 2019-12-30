@@ -17,61 +17,80 @@ class Pairs extends Component {
         error: null
     }
 
+    componentDidMount() {
+        fetch(`${config.API_ENDPOINT}/pools`, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('Something went wrong')
+            }
+            return res.json()
+        })
+        .then(res => {
+            console.log(res)
+            const { pool_name } = this.context.user;
+            const data = res;
+            
+            data.map((pool) => {
+                if (pool.pool_name === pool_name) {
+
+                    this.context.setPoolId(pool.pool_id)
+
+                    return this.setState({
+                        pool_id: pool.pool_id
+                    })
+                }
+            })
+        })
+        .catch(res => {
+                this.setState({
+                    error: res.error
+                })
+            })
+    }
+
 
     handleSubmit = (event) => {
         event.preventDefault();
         console.log('Submited')
-
+        const {email, pool_name} = this.context.user;
+        // fetch(`${config.API_ENDPOINT}/pools`, {
+        //     method: 'POST',
+        //     headers: {
+        //         'content-type' : 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //         admin_email: email,
+        //         pool_name : pool_name
+        //     })
+        // })
+        // .then(res => {
+        //     (!res.ok)
+        //         ? res.json().then(e => Promise.reject(e))
+        //         : res.json()
+        // })
+        // .catch(res => {
+        //     this.setState({
+        //         error: res.error
+        //     })
+        // })
 
         //fetch
         //post req
     }
 
-    shuffle = (array) => {
-        let poolOfNames = [];
-        while (array.length !== 0) {
-            let randomIndex;
-            randomIndex = Math.floor(Math.random() * array.length);
-            poolOfNames.push(array[randomIndex]);
-            array.splice(randomIndex, 1);
-        }
-        return poolOfNames;
-    }
-
     render() {
 
         const { users } = this.context;
-        let userList = users.map(obj => {
-            let newObject = {};
 
-            Object.keys(obj).forEach(properyKey => {
-                newObject[properyKey] = obj[properyKey]
-            });
-
-            return newObject;
-        })
-        userList.map(obj => obj.pairName = "")
-
-        let poolOfNames = this.shuffle(userList);
-        
-        let left = poolOfNames.slice(0, poolOfNames.length / 2)
-        let right = poolOfNames.slice(Math.ceil(poolOfNames.length / 2))
-
-        left.forEach((leftItem, i) => {
-            let rightItem = right[i]
-            let leftUser = poolOfNames
-                .find(user => leftItem.id === user.id)
-
-            let rightUser = poolOfNames
-                .find(user => rightItem.id === user.id)
-            
-            leftUser.pairName = rightUser.name;
-            rightUser.pairName = leftUser.name;
-        })
 
         return (
             <section>
-                {poolOfNames.map((user) => (
+                {users.map((user) => (
                     <li key={user.id}>{user.name} has: <span>{user.pairName}</span></li>
                 ))}
 
