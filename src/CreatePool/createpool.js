@@ -84,12 +84,11 @@ class CreatePool extends Component {
         users.splice(0, 1)
         let result = await postPoolData(users, pool_name, email)
         this.context.setPoolId(result)
-
     }
 
 
     render() {
-        const { users } = this.state;
+
         return (
             <div>
 
