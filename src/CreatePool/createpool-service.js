@@ -25,6 +25,9 @@ const CreatePoolService = {
             .then(data => {
                 return data;
             })
+            .catch(error => {
+                console.log(error)
+            })
 
     },
 
@@ -49,6 +52,34 @@ const CreatePoolService = {
                 let id = data.pool_id
                 return id;
             })
+            .catch(error => {
+                console.log(error)
+            })
+    },
+
+    postPairs(users, pool_id) {
+        return fetch(pairsUrl, {
+            method: 'POST',
+            headers: {
+                'content-type' : 'application/json'
+            },
+            body: JSON.stringify({
+                users,
+                pool_id
+            })
+        })
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('Something went wrong during pairs post request')
+            }
+            return res.json()
+        })
+        .then(data => {
+            return data;
+        })
+        .catch(error => {
+            console.log(error)
+        })
     }
 }
 

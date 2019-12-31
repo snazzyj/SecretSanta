@@ -11,10 +11,17 @@ async function postPoolData(users, pool_name, email) {
     const postPool = CreatePoolService.postPool(pool_name, email)
     .then(res => {
         return res
-    });
+    })
+    // .then(data => {
+    //     return CreatePoolService.postPairs(users, data)
+    // });
 
     return postPool
 
+}
+
+function postPairsData(users, pool_id) {
+    return CreatePoolService.postPairs(users, pool_id)
 }
 
 class CreatePool extends Component {
@@ -83,7 +90,9 @@ class CreatePool extends Component {
         const { email } = this.context.user
         users.splice(0, 1)
         let result = await postPoolData(users, pool_name, email)
+        postPairsData(users, result)
         this.context.setPoolId(result)
+        this.props.history.push('/pairs')
     }
 
 

@@ -20,7 +20,6 @@ class App extends Component {
       id: null,
       isLoggedIn: false,
       userInterests: [],
-      pool_name: '',
       pool_id: null,
     }
   };
@@ -43,14 +42,6 @@ class App extends Component {
     })
   }
   
-  // addPoolName = poolName => {
-  //   this.setState({
-  //     user: {
-  //       ...this.state.user,
-  //       pool_name: poolName
-  //     }
-  //   })
-  // }
 
   setPoolId = pool_id => {
     this.setState({
