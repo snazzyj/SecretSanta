@@ -52,25 +52,25 @@ class App extends Component {
     })
   }
 
-  addUserInterest = interest => {
-    this.setState({
-      user: {
-      ...this.state.user,
-      userInterests: this.state.user.userInterests.concat(interest)
-    }
-    })
-  }
+  // addUserInterest = interest => {
+  //   this.setState({
+  //     user: {
+  //     ...this.state.user,
+  //     userInterests: this.state.user.userInterests.concat(interest)
+  //   }
+  //   })
+  // }
 
-  removeUserInterest = interest => {
-    this.setState({
-      user: {
-        ...this.state.user,
-        userInterests: this.state.user.userInterests.filter( (item) => {
-          return item !== interest
-        } )
-      }
-    })
-  }
+  // removeUserInterest = interest => {
+  //   this.setState({
+  //     user: {
+  //       ...this.state.user,
+  //       userInterests: this.state.user.userInterests.filter( (item) => {
+  //         return item !== interest
+  //       } )
+  //     }
+  //   })
+  // }
 
   render() {
     const contextValue = {
