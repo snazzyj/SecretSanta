@@ -12,12 +12,7 @@ async function postPoolData(users, pool_name, email) {
     .then(res => {
         return res
     })
-    // .then(data => {
-    //     return CreatePoolService.postPairs(users, data)
-    // });
-
     return postPool
-
 }
 
 function postPairsData(users, pool_id) {
