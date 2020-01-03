@@ -16,10 +16,9 @@ class App extends Component {
     users: [],
     user: {
       name: '',
-      email: 'silentx.alex@gmail.com',
+      email: '',
       id: null,
       isLoggedIn: false,
-      userInterests: [],
       pool_id: null,
     }
   };
@@ -33,16 +32,25 @@ class App extends Component {
   setUserLogin = user => {
     this.setState({
       user: {
-        // name: user.name,
+        name: user.name,
         email: user.email,
         isLoggedIn: true,
-        // id: user.id,
-        // userInterests: []
+        id: user.id,
+      }
+    })
+  }
+
+  setUserLogout = () => {
+    this.setState({
+      user: {
+        name: '',
+        email: '',
+        isLoggedIn: false,
+        id: null
       }
     })
   }
   
-
   setPoolId = pool_id => {
     this.setState({
       user: {
@@ -52,34 +60,13 @@ class App extends Component {
     })
   }
 
-  // addUserInterest = interest => {
-  //   this.setState({
-  //     user: {
-  //     ...this.state.user,
-  //     userInterests: this.state.user.userInterests.concat(interest)
-  //   }
-  //   })
-  // }
-
-  // removeUserInterest = interest => {
-  //   this.setState({
-  //     user: {
-  //       ...this.state.user,
-  //       userInterests: this.state.user.userInterests.filter( (item) => {
-  //         return item !== interest
-  //       } )
-  //     }
-  //   })
-  // }
-
   render() {
     const contextValue = {
       users: this.state.users,
       user: this.state.user,
       setPool: this.setPool,
       setUserLogin: this.setUserLogin,
-      addUserInterest: this.addUserInterest,
-      removeUserInterest: this.removeUserInterest,
+      setUserLogout: this.setUserLogout,
       setPoolId: this.setPoolId
     }
 

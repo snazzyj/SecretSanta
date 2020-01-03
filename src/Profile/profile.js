@@ -142,8 +142,7 @@ class Profile extends Component {
                 'content-type' : 'application/json'
             },
             body: JSON.stringify({
-                interest,
-                email
+                interest
             })
         })
         .then(res => {

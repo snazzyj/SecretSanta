@@ -9,10 +9,8 @@ class Homepage extends Component {
     setHello = (user) => {
         if(user.isLoggedIn) {
             return (
-                <h2>Hello, {user.name}</h2>
+                <h2>Welcome, {user.name}</h2>
             )
-        } else {
-            return ''
         }
     }
 

@@ -1,4 +1,5 @@
-import config from '../config'
+import config from '../config';
+import TokenService from './token-service';
 
 const AuthApiService = {
   postLogin({ email, password }) {
@@ -13,7 +14,13 @@ const AuthApiService = {
       (!res.ok)
       ? res.json().then(e => Promise.reject(e))
       : res.json()
-      )
+    )
+    .then((data) => {
+      const {authToken} = data;
+      console.log(data)
+      TokenService.saveAuthToken(authToken)
+      return data;
+    })
     },
     postUser(user) {
       return fetch(`${config.API_ENDPOINT}/auth/register`, {
