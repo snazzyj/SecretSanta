@@ -17,11 +17,21 @@ class App extends Component {
     user: {
       name: '',
       email: '',
-      id: null,
+      id: '',
       isLoggedIn: false,
-      pool_id: null,
+      pool_id: [],
     }
   };
+
+  componentDidMount() {
+    const userData = JSON.parse(localStorage.getItem('user'))
+    
+    this.setState(prevState => ({
+      ...prevState,
+      userData
+    }))
+  }
+
 
   setPool = users => {
     this.setState({
@@ -30,14 +40,27 @@ class App extends Component {
   }
 
   setUserLogin = user => {
+
+    const userObj = {
+      name: user.name,
+      email: user.email,
+      isLoggedIn: true,
+      id: user.id,
+      pool_id: user.pool_id
+    }
+
     this.setState({
       user: {
         name: user.name,
         email: user.email,
         isLoggedIn: true,
         id: user.id,
+        pool_id: user.pool_id
       }
     })
+
+    localStorage.setItem('user', JSON.stringify(userObj))
+
   }
 
   setUserLogout = () => {
@@ -49,6 +72,8 @@ class App extends Component {
         id: null
       }
     })
+
+    localStorage.removeItem('user')
   }
   
   setPoolId = pool_id => {

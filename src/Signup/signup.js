@@ -4,19 +4,8 @@ import AuthApiService from '../services/auth-api-service';
 
 const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i); // eslint-disable-line
 const validPasswordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-const validateForm = (errors) => {
-    let valid = true;
-    Object.values(errors).forEach(
-        (val) => val.length > 0 && (valid = false)
-    );
-    return valid;
-}
 
 class SignUp extends Component {
-
-    static defaultProps = {
-        onRegistrationSuccess: () => {}
-    }
 
     constructor(props) {
         super(props);
@@ -59,7 +48,7 @@ class SignUp extends Component {
             errors.password =
             validPasswordRegex.test(value)
                     ? ''
-                    : 'Must contain a number, Upper case letter, Lower case letter and be 6 to 20 characters long'
+                    : 'Must contain a Number, Upper case letter, Lower case letter and be 6 to 20 characters long'
         }
 
         this.setState({
@@ -86,8 +75,7 @@ class SignUp extends Component {
             name.value = ''
             email.value = ''
             password.val = ''
-            // this.props.onRegistrationSuccess()
-            this.history.props.push('/login')
+            this.props.history.push('/login')
         })
         .catch(res => {
             this.setState({

@@ -13,7 +13,7 @@ class Pairs extends Component {
 
     componentDidMount() {
         const {pool_id} = this.context.user  
-        let url = `${config.API_ENDPOINT}/pairings/1`
+        let url = `${config.API_ENDPOINT}/pairings/${pool_id}`
 
         fetch(url, {
             method: 'GET',

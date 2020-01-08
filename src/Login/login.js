@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import SecretSantaContext from '../SecretSantaContext';
 import AuthApiService from '../services/auth-api-service';
-import TokenService from '../services/token-service';
 
 class Login extends Component {
 

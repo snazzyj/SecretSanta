@@ -11,6 +11,8 @@ class Homepage extends Component {
             return (
                 <h2>Welcome, {user.name}</h2>
             )
+        } else {
+            return ''
         }
     }
 

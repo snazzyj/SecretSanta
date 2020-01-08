@@ -1,82 +1,66 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import SecretSantaContext from '../SecretSantaContext';
 import config from '../config';
 
-const url = `${config.API_ENDPOINT}`
+const url = config.API_ENDPOINT;
 
 class Profile extends Component {
 
     state = {
         error: null,
-        giftee: '',
-        gifteeEmail: '',
+        gifteeName: [],
+        gifteeId: [],
+        giftee: [],
         userInterests: []
     }
 
     static contextType = SecretSantaContext;
 
     componentDidMount() {
-        const {email} = this.context.user
-        const {pool_id} = this.context.user
-        
-        // fetch(`${url}/pairings/${pool_id}`, {
-        //     method: 'GET'
-        // })
-        //     .then(res => {
-        //         if (!res.ok) {
-        //             throw new Error('Something went wrong')
-        //         }
-        //         return res.json()
-        //     })
-        //     .then(res => {
-        //         const data = res;
-        //         // const { email } = this.context.user
-        //         data.map((user) => {
-        //             console.log(user)
-        //             if (user.email === email) {
-        //                 this.setState({
-        //                     gifteeEmail: user.giftee
-        //                 })
-                    
-        //             }
+        const { email, pool_id} = this.context.user
 
-        //     })
-        // .catch(error =>{
-        //     this.setState({
-        //         error
-        //     })
-        // })
-
-        // fetch(`${url}/users/email/${this.state.gifteeEmail}`, {
-        //     method: 'GET'
-        // })
-        //     .then(res => {
-        //         if (!res.ok) {
-        //             throw new Error(`Something went wrong fetching the giftee's name`)
-        //         }
-        //        return res.json()
-        //     })
-        //     .then(res => {
-        //         this.setState({
-        //             giftee: res[0].name
-        //         })
-                
-        //     })
-        // })
-        // .catch(error =>{
-        //     this.setState({
-        //         error
-        //     })
-        // })
+        if(pool_id !== undefined) {
+            pool_id.map((id) => {
+                return fetch(`${url}/pairings/${id.pool_id}`, {
+                    method: 'GET'
+                })
+                    .then(res => {
+                        if (!res.ok) {
+                            throw new Error('Something went wrong')
+                        }
+                        return res.json()
+                    })
+                    .then(res => {
+                        const {id} = this.context.user
+                        res.map((user) => {
+                            if( user.id === id ) {
+                                return this.setState({
+                                    giftee: [...this.state.giftee, 
+                                    {
+                                        gifteeName: user.giftee,
+                                        gifteeId: user.giftee_id
+                                    }],
+                                })
+                            }
+                            return '';
+                        })
+                    })
+                    .catch(error => {
+                        this.setState({
+                            error
+                        })
+                    })
+            })
+        }
 
         fetch(`${url}/interests/${email}`, {
             method: 'GET'
         })
             .then(res => {
-                if(!res.ok) {
+                if (!res.ok) {
                     throw new Error(`Something went wrong fetching user interests`)
                 }
-
                 return res.json()
             })
             .then(res => {
@@ -84,7 +68,7 @@ class Profile extends Component {
                     userInterests: res
                 })
             })
-            .catch(error =>{
+            .catch(error => {
                 this.setState({
                     error
                 })
@@ -92,84 +76,74 @@ class Profile extends Component {
     }
 
     componentDidUpdate(prevState) {
-        if(this.state.userInterests !== prevState.userInterests) {
+        if (this.state.userInterests !== prevState.userInterests) {
         }
     }
+
     addUserInterest = (interest, e) => {
         e.preventDefault();
-        const {email} = this.context.user
-        let newInterest = {interest, email}
-        
+        const { email } = this.context.user
+        let newInterest = { interest, email }
+
         this.setState({
-          userInterests: this.state.userInterests.concat(newInterest)
+            userInterests: this.state.userInterests.concat(newInterest)
         })
 
         fetch(`${url}/interests/${email}`, {
             method: 'POST',
             headers: {
-                'content-type' : 'application/json'
+                'content-type': 'application/json'
             },
-        body: JSON.stringify({
-            interest,
-            email
-        })
-    })
-        .then(res => {
-            if(!res.ok) {
-                throw new Error (`Something went wrong posting interest`)
-            }
-            return res.json()
-        })
-        .catch(error =>{
-            this.setState({
-                error
+            body: JSON.stringify({
+                interest,
+                email
             })
         })
-               
-      }
-    
-      removeUserInterest = interest => {
-        const {email} = this.context.user
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(`Something went wrong posting interest`)
+                }
+                return res.json()
+            })
+            .catch(error => {
+                this.setState({
+                    error
+                })
+            })
+    }
+
+    removeUserInterest = interest => {
+        const { email } = this.context.user
         this.setState({
-            userInterests: this.state.userInterests.filter( (item) => {
-              return item !== interest
+            userInterests: this.state.userInterests.filter((item) => {
+                return item !== interest
             })
         })
 
         fetch(`${url}/interests/${email}`, {
             method: 'DELETE',
             headers: {
-                'content-type' : 'application/json'
+                'content-type': 'application/json'
             },
             body: JSON.stringify({
                 interest
             })
         })
-        .then(res => {
-            if(!res.ok) {
-                throw new Error (`Something went wrong deleting interest`)
-            }
-            return res.json()
-        })
-        .catch(error => {
-            this.setState({
-                error
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error(`Something went wrong deleting interest`)
+                }
+                return res.json()
             })
-        })
-      }
-    
+            .catch(error => {
+                this.setState({
+                    error
+                })
+            })
+    }
 
     render() {
-
-        const {
-            //allInterests, //needed for autocomplete later    
-            user
-        } = this.context
-
-        const { userInterests } = this.state;
-        const {giftee} = this.state
-        console.log(this.state.userInterests)
-
+        const { userInterests, giftee } = this.state;
         return (
             <section>
                 <h1>Profile</h1>
@@ -178,9 +152,9 @@ class Profile extends Component {
                     <label>Add Interests</label>
                     <input ref={HTMLInputElement => this.input = HTMLInputElement} />
 
-                    <button onClick={(e) => { 
-                        // this.handleAddInterest(e); 
-                        this.addUserInterest(this.input.value, e) }}>Add</button>
+                    <button onClick={(e) => {
+                        this.addUserInterest(this.input.value, e)
+                    }}>Add</button>
                 </form>
 
                 <h3>Interests</h3>
@@ -196,8 +170,13 @@ class Profile extends Component {
                     ))}
                 </ul>
 
-                <h3>Current Partner</h3>
-                <a href='/'>{giftee}</a>
+                <h3>Who you've been paired up with: </h3>
+                {giftee.map((giftee) => {
+                    let id = giftee.gifteeId
+                    console.log(id)
+                    return <Link to={giftee.gifteeId} key={id}>{giftee.gifteeName}</Link>
+                    // return <Link to={id} key={giftee.gifteeId}>{giftee.gifteeName}</Link>
+                })}
 
             </section>
 

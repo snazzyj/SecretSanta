@@ -7,7 +7,7 @@ const Required = () => (
 )
 
 async function postPoolData(users, pool_name, email) {
-    const postUsers = CreatePoolService.postUsers(users);
+    const postUsers = CreatePoolService.postUsers(users); // eslint-disable-line
     const postPool = CreatePoolService.postPool(pool_name, email)
     .then(res => {
         return res
@@ -38,7 +38,7 @@ class CreatePool extends Component {
 
     createUI = () => {
         return this.state.users.map((_, i) => (
-            i = 1 + i,
+            i = 1 + i, // eslint-disable-line
             <div key={i}>{i}
                 <label htmlFor="name"></label>
                 <input name="name" onChange={(e) => this.handleInputChange(i, e)} />
@@ -93,6 +93,8 @@ class CreatePool extends Component {
 
     render() {
 
+        const {error} = this.state;
+
         return (
             <div>
 
@@ -109,6 +111,8 @@ class CreatePool extends Component {
                     <input type="button" value="Add More" onClick={() => this.addField()} />
                     <input type="submit" value="Get Pairs" />
                 </form>
+
+                <p>{error}</p>
             </div>
         )
     }
