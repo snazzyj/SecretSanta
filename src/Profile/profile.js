@@ -172,10 +172,9 @@ class Profile extends Component {
 
                 <h3>Who you've been paired up with: </h3>
                 {giftee.map((giftee) => {
-                    let id = giftee.gifteeId
-                    console.log(id)
-                    return <Link to={giftee.gifteeId} key={id}>{giftee.gifteeName}</Link>
-                    // return <Link to={id} key={giftee.gifteeId}>{giftee.gifteeName}</Link>
+                    let id = giftee.gifteeId.toString()
+
+                    return <Link to={id} key={id}>{giftee.gifteeName}</Link>
                 })}
 
             </section>
