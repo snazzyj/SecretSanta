@@ -7,7 +7,8 @@ import Profile from './Profile/profile';
 import NavBar from './Nav/navbar';
 import Pairs from './Pairings/pairs';
 import Login from './Login/login';
-import Homepage from './HomePage/homepage'
+import Homepage from './HomePage/homepage';
+import Verify from './Verify/verify';
 import SecretSantaContext from './SecretSantaContext';
 
 class App extends Component {
@@ -24,12 +25,11 @@ class App extends Component {
   };
 
   componentDidMount() {
-    const userData = JSON.parse(localStorage.getItem('user'))
-    
-    this.setState(prevState => ({
-      ...prevState,
-      userData
-    }))
+    const user = JSON.parse(localStorage.getItem('user'))
+
+    this.setState({
+      user
+    })
   }
 
 
@@ -112,6 +112,7 @@ class App extends Component {
               <Route path="/signup" component={SignUp} />
               <Route path="/profile/:userId" component={Profile} />
               <Route path="/login" component={Login} />
+              <Route path="/verify/:poolId" component={Verify} />
             </Switch>
           </main>
 
