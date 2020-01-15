@@ -31,7 +31,6 @@ class Pairs extends Component {
             this.setState({
                 pairs: data
             })
-            console.log({data})
         })
         .catch(error => {
             this.setState({

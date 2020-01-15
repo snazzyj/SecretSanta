@@ -83,7 +83,9 @@ class CreatePool extends Component {
 
         const { users, pool_name } = this.state
         const { email } = this.context.user
+        console.log(users)
         users.splice(0, 1)
+        console.log(users)
         let result = await postPoolData(users, pool_name, email)
         postPairsData(users, result)
         this.context.setPoolId(result)

@@ -27,9 +27,11 @@ class App extends Component {
   componentDidMount() {
     const user = JSON.parse(localStorage.getItem('user'))
 
-    this.setState({
-      user
-    })
+    if(user) {
+      this.setState({
+        user
+      })
+    }
   }
 
 
@@ -69,7 +71,7 @@ class App extends Component {
         name: '',
         email: '',
         isLoggedIn: false,
-        id: null
+        id: ''
       }
     })
 
