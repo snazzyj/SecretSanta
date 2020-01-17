@@ -9,8 +9,6 @@ class Profile extends Component {
 
     state = {
         error: null,
-        gifteeName: [],
-        gifteeId: [],
         giftee: [],
         userInterests: []
     }
@@ -19,12 +17,11 @@ class Profile extends Component {
 
     componentDidMount() {
         const { email, pool_id} = this.context.user
-
         if(pool_id !== undefined) {
-            pool_id.map((id) => {
+            pool_id.forEach((id) => {
                 return fetch(`${url}/pairings/${id.pool_id}`, {
                     method: 'GET'
-                })
+                    })
                     .then(res => {
                         if (!res.ok) {
                             throw new Error('Something went wrong')
@@ -32,6 +29,7 @@ class Profile extends Component {
                         return res.json()
                     })
                     .then(res => {
+                        console.log({res})
                         const {id} = this.context.user
                         res.map((user) => {
                             if( user.id === id ) {
@@ -51,7 +49,7 @@ class Profile extends Component {
                             error
                         })
                     })
-            })
+                })
         }
 
         fetch(`${url}/interests/${email}`, {
@@ -76,7 +74,7 @@ class Profile extends Component {
     }
 
     componentDidUpdate(prevState) {
-        if (this.state.userInterests !== prevState.userInterests) {
+        if (this.state.userInterests !== prevState.userInterests || this.state.giftee !== prevState.giftee) {
         }
     }
 
