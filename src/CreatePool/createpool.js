@@ -7,10 +7,13 @@ const Required = () => (
 )
 
 async function postPoolData(users, pool_name, email) {
-    const postUsers = CreatePoolService.postUsers(users); // eslint-disable-line
+    const postUsers = CreatePoolService.postUsers(users)
+    .then(res => {
+        console.log({res})
+    }); // eslint-disable-line
     const postPool = CreatePoolService.postPool(pool_name, email)
     .then(res => {
-        return res
+        return postPairsData(users, res)
     })
     return postPool
 }
@@ -87,7 +90,7 @@ class CreatePool extends Component {
         users.splice(0, 1)
         console.log(users)
         let result = await postPoolData(users, pool_name, email)
-        postPairsData(users, result)
+        // postPairsData(users, result)
         this.context.setPoolId(result)
         this.props.history.push('/pairs')
     }

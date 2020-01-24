@@ -49,7 +49,7 @@ render() {
         <section>
             {pairs.map((user) => (
                 <li key={user.id}>{user.gifter} has: <span>{user.giftee}</span></li>
-            ))}
+            ))} 
         </section>
     )
 }

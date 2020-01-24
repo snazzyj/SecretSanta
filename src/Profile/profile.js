@@ -10,138 +10,40 @@ class Profile extends Component {
     state = {
         error: null,
         giftee: [],
-        userInterests: []
     }
 
     static contextType = SecretSantaContext;
 
-    componentDidMount() {
-        const { email, pool_id} = this.context.user
-        if(pool_id !== undefined) {
-            pool_id.forEach((id) => {
-                return fetch(`${url}/pairings/${id.pool_id}`, {
-                    method: 'GET'
-                    })
-                    .then(res => {
-                        if (!res.ok) {
-                            throw new Error('Something went wrong')
-                        }
-                        return res.json()
-                    })
-                    .then(res => {
-                        console.log({res})
-                        const {id} = this.context.user
-                        res.map((user) => {
-                            if( user.id === id ) {
-                                return this.setState({
-                                    giftee: [...this.state.giftee, 
-                                    {
-                                        gifteeName: user.giftee,
-                                        gifteeId: user.giftee_id
-                                    }],
-                                })
-                            }
-                            return '';
-                        })
-                    })
-                    .catch(error => {
-                        this.setState({
-                            error
-                        })
-                    })
-                })
-        }
-
-        fetch(`${url}/interests/${email}`, {
-            method: 'GET'
-        })
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error(`Something went wrong fetching user interests`)
-                }
-                return res.json()
-            })
-            .then(res => {
-                this.setState({
-                    userInterests: res
-                })
-            })
-            .catch(error => {
-                this.setState({
-                    error
-                })
-            })
-    }
-
     componentDidUpdate(prevState) {
-        if (this.state.userInterests !== prevState.userInterests || this.state.giftee !== prevState.giftee) {
-        }
+        if (this.state.userInterests !== prevState.userInterests) {}
     }
 
     addUserInterest = (interest, e) => {
         e.preventDefault();
-        const { email } = this.context.user
-        let newInterest = { interest, email }
-
-        this.setState({
-            userInterests: this.state.userInterests.concat(newInterest)
-        })
-
-        fetch(`${url}/interests/${email}`, {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                interest,
-                email
-            })
-        })
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error(`Something went wrong posting interest`)
-                }
-                return res.json()
-            })
-            .catch(error => {
-                this.setState({
-                    error
-                })
-            })
+        this.context.addUserInterest(interest)
     }
 
     removeUserInterest = interest => {
-        const { email } = this.context.user
-        this.setState({
-            userInterests: this.state.userInterests.filter((item) => {
-                return item !== interest
-            })
-        })
+        this.context.removeUserInterest(interest)
+    }
 
-        fetch(`${url}/interests/${email}`, {
-            method: 'DELETE',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                interest
-            })
-        })
-            .then(res => {
-                if (!res.ok) {
-                    throw new Error(`Something went wrong deleting interest`)
-                }
-                return res.json()
-            })
-            .catch(error => {
-                this.setState({
-                    error
-                })
-            })
+    compareIdToParams = (id, giftee) => {
+        let userId = id.toString()
+        if(userId === this.props.match.params.userId) {
+        return giftee.map((giftee) => {
+            let id = giftee.gifteeId.toString()
+
+            return <Link to={id} key={id}>{giftee.gifteeName}</Link>
+        }) 
+        } else {
+            return "It wouldn't be very secretive to see these pairs"
+        }
     }
 
     render() {
-        const { userInterests, giftee } = this.state;
+        const { userInterests } = this.context.user;
+        const {giftee} = this.state
+        const {id} = this.context.user
         return (
             <section>
                 <h1>Profile</h1>
@@ -167,13 +69,9 @@ class Profile extends Component {
                         </li>
                     ))}
                 </ul>
+                <h3>Pairs</h3>
+                {this.compareIdToParams(id, giftee)}
 
-                <h3>Who you've been paired up with: </h3>
-                {giftee.map((giftee) => {
-                    let id = giftee.gifteeId.toString()
-
-                    return <Link to={id} key={id}>{giftee.gifteeName}</Link>
-                })}
 
             </section>
 
