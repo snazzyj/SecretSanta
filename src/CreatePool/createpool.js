@@ -6,23 +6,20 @@ const Required = () => (
     <span className='required'>*</span>
 )
 
-async function postPoolData(users, pool_name, email) {
-    const postUsers = CreatePoolService.postUsers(users)
-    .then(res => {
-        console.log({res})
-    }); // eslint-disable-line
-    const postPool = CreatePoolService.postPool(pool_name, email)
-    .then(res => {
-        return postPairsData(users, res)
-    })
-    return postPool
-}
-
-function postPairsData(users, pool_id) {
-    return CreatePoolService.postPairs(users, pool_id)
-}
 
 class CreatePool extends Component {
+    postPoolData = (pool_name, email) => {
+        return CreatePoolService.postPool(pool_name, email)
+        
+    }
+    
+    postPairsData = (users, pool_id) => {
+        return CreatePoolService.postPairs(users, pool_id)
+    }
+    
+    postUserData = (users) => {
+        return CreatePoolService.postUsers(users) // eslint-disable-line
+    }
 
     static contextType = SecretSantaContext;
 
@@ -88,11 +85,13 @@ class CreatePool extends Component {
         const { email } = this.context.user
         console.log(users)
         users.splice(0, 1)
-        console.log(users)
-        let result = await postPoolData(users, pool_name, email)
-        // postPairsData(users, result)
-        this.context.setPoolId(result)
-        this.props.history.push('/pairs')
+        this.postUserData(users)
+        await this.postPoolData(pool_name, email)
+            .then(res => {
+                this.postPairsData(users, res)
+                this.context.setPoolId(res)
+                this.props.history.push('/pairs')
+            })
     }
 
 
@@ -106,7 +105,7 @@ class CreatePool extends Component {
                 <h1>Create Pool</h1>
                 <form onSubmit={this.handleSubmit.bind(this)} >
                     <label htmlFor="Pool__Name">Pool Name</label>
-                    <input type="text" onChange={e => this.handlePoolName(e)} />
+                    <input type="text" onChange={e => this.handlePoolName(e)} required/>
                     <div>
                         <p>Name{''}<Required /></p>
 

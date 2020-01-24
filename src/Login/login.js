@@ -24,12 +24,12 @@ class Login extends Component {
             .then(res => {
                 console.log(res)
                 const { user } = res;
-                this.props.history.push('/')
                 this.context.setUserLogin(user)
+                this.props.history.push('/')
             })
-            .catch(res => {
+            .catch(error => {
                 this.setState({
-                    error: res.error
+                    error
                 })
             })
 

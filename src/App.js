@@ -25,7 +25,8 @@ class App extends Component {
       pool_id: [],
       userInterests: [],
       userPairs: []
-    }
+    },
+    new_pool_id: null
   };
 
   componentDidMount() {
@@ -60,7 +61,7 @@ class App extends Component {
         id: user.id,
         pool_id: user.pool_id,
         userInterests: this.getInterest(user.email),
-        userPairs: this.getPairs(user.pool_id)
+        // userPairs: this.getPairs(user.pool_id)
       }
     })
     console.log(this.state.user)
@@ -146,10 +147,7 @@ class App extends Component {
 
   setPoolId = pool_id => {
     this.setState({
-      user: {
-        ...this.state.user,
-        pool_id
-      }
+      new_pool_id: pool_id
     })
   }
 
@@ -246,7 +244,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Homepage} />
               <Route path="/create" component={CreatePool} />
-              <Route path="/pairs" component={Pairs} />
+              <Route path="/pairs/:pool_id" component={Pairs} />
               <Route path="/signup" component={SignUp} />
               <Route path="/profile/:userId" component={Profile} />
               <Route path="/login" component={Login} />

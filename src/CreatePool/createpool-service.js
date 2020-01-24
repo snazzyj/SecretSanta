@@ -16,7 +16,7 @@ const CreatePoolService = {
         })
             .then(res => {
                 if (!res.ok) {
-                    throw new Error('Something went wrong during users post request')
+                    throw new Error(res.error)
                 }
                 return res.json()
 
@@ -43,7 +43,7 @@ const CreatePoolService = {
         })
             .then(res => {
                 if (!res.ok) {
-                    throw new Error('Something went wrong during pools post request')
+                    throw new Error(res.error)
                 }
                 return res.json()
             })
@@ -69,7 +69,7 @@ const CreatePoolService = {
         })
         .then(res => {
             if (!res.ok) {
-                throw new Error('Something went wrong during pairs post request')
+                throw new Error(res.error)
             }
             return res.json()
         })
