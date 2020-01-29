@@ -22,9 +22,9 @@ class App extends Component {
       email: '',
       id: '',
       isLoggedIn: false,
-      pool_id: [],
+      pairData: [],
       userInterests: [],
-      userPairs: []
+      poolData: []
     },
     new_pool_id: null
   };
@@ -59,13 +59,11 @@ class App extends Component {
         email: user.email,
         isLoggedIn: true,
         id: user.id,
-        pool_id: user.pool_id,
+        pairData: user.pairData,
         userInterests: this.getInterest(user.email),
-        // userPairs: this.getPairs(user.pool_id)
+        poolData: user.poolData
       }
     })
-    console.log(this.state.user)
-
 
     localStorage.setItem('user', JSON.stringify(this.state.user))
   }
@@ -90,46 +88,6 @@ class App extends Component {
       })
   }
 
-  // getPairs = (pool_id) => {
-  //   const pair = [];
-  //     if (pool_id !== undefined && pool_id.length > 0) {
-  //       pool_id.forEach((id) => {
-  //         fetch(`${url}/pairings/${id.pool_id}`, {
-  //           method: 'GET'
-  //         })
-  //           .then(res => {
-  //             if (!res.ok) {
-  //               throw new Error('Something went wrong')
-  //             }
-  //             return res.json()
-  //           })
-  //           .then(res => {
-  //             const { id } = this.state.user
-  //             let filteredPairs = res.filter((pair) => {
-  //               return pair.id === id
-  //             })  
-  //              pair.push({
-  //               gifteeName: filteredPairs[0].giftee,
-  //               giftee_id: filteredPairs[0].giftee_id
-  //             })
-              
-  //             this.setState({
-  //               user: {
-  //                 ...this.state.user,
-  //                 userPairs: [...this.state.user.userPairs, pair]
-  //               }
-  //             })
-  //           })
-  //       })
-
-  //       console.log({pair})
-
-
-  //     }
-
-   
-  // }
-
   setUserLogout = () => {
     this.setState({
       user: {
@@ -138,7 +96,9 @@ class App extends Component {
         isLoggedIn: false,
         id: '',
         pool_id: [],
-        userInterests: []
+        userInterests: [],
+        pairData: [],
+        poolData: []
       }
     })
 
@@ -223,6 +183,7 @@ class App extends Component {
     const contextValue = {
       users: this.state.users,
       user: this.state.user,
+      new_pool_id: this.state.new_pool_id,
       setPool: this.setPool,
       setUserLogin: this.setUserLogin,
       setUserLogout: this.setUserLogout,
@@ -244,7 +205,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={Homepage} />
               <Route path="/create" component={CreatePool} />
-              <Route path="/pairs/:pool_id" component={Pairs} />
+              <Route path="/pairs/:poolId" component={Pairs} />
               <Route path="/signup" component={SignUp} />
               <Route path="/profile/:userId" component={Profile} />
               <Route path="/login" component={Login} />

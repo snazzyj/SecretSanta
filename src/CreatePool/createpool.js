@@ -8,18 +8,6 @@ const Required = () => (
 
 
 class CreatePool extends Component {
-    postPoolData = (pool_name, email) => {
-        return CreatePoolService.postPool(pool_name, email)
-        
-    }
-    
-    postPairsData = (users, pool_id) => {
-        return CreatePoolService.postPairs(users, pool_id)
-    }
-    
-    postUserData = (users) => {
-        return CreatePoolService.postUsers(users) // eslint-disable-line
-    }
 
     static contextType = SecretSantaContext;
 
@@ -78,20 +66,20 @@ class CreatePool extends Component {
         })
     }
 
-    async handleSubmit(event) {
+    handleSubmit(event) {
         event.preventDefault();
 
         const { users, pool_name } = this.state
         const { email } = this.context.user
-        console.log(users)
         users.splice(0, 1)
-        this.postUserData(users)
-        await this.postPoolData(pool_name, email)
-            .then(res => {
-                this.postPairsData(users, res)
-                this.context.setPoolId(res)
-                this.props.history.push('/pairs')
-            })
+        console.log({users})
+        CreatePoolService.postUsers(users)
+        CreatePoolService.postPoolData(users, pool_name, email)
+        .then(poolIdNumber => {
+            const {pool_id} = poolIdNumber
+            this.context.setPoolId(pool_id)
+            this.props.history.push(`/pairs/${pool_id}`)
+        })
     }
 
 

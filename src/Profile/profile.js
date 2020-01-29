@@ -1,21 +1,13 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import SecretSantaContext from '../SecretSantaContext';
-import config from '../config';
-
-const url = config.API_ENDPOINT;
 
 class Profile extends Component {
-
-    state = {
-        error: null,
-        giftee: [],
-    }
 
     static contextType = SecretSantaContext;
 
     componentDidUpdate(prevState) {
-        if (this.state.userInterests !== prevState.userInterests) {}
+        if (this.context.user.userInterests !== prevState.userInterests) {}
     }
 
     addUserInterest = (interest, e) => {
@@ -30,10 +22,11 @@ class Profile extends Component {
     compareIdToParams = (id, giftee) => {
         let userId = id.toString()
         if(userId === this.props.match.params.userId) {
-        return giftee.map((giftee) => {
-            let id = giftee.gifteeId.toString()
+            console.log(giftee)
+        return giftee.map((giftee, i) => {
+            let id = giftee.giftee_id.toString()
 
-            return <Link to={id} key={id}>{giftee.gifteeName}</Link>
+            return <li key={i}><Link to={id} key={i}>{giftee.giftee}</Link></li>
         }) 
         } else {
             return "It wouldn't be very secretive to see these pairs"
@@ -41,9 +34,7 @@ class Profile extends Component {
     }
 
     render() {
-        const { userInterests } = this.context.user;
-        const {giftee} = this.state
-        const {id} = this.context.user
+        const { userInterests, id, pairData } = this.context.user;
         return (
             <section>
                 <h1>Profile</h1>
@@ -70,7 +61,9 @@ class Profile extends Component {
                     ))}
                 </ul>
                 <h3>Pairs</h3>
-                {this.compareIdToParams(id, giftee)}
+                <ul>
+                {this.compareIdToParams(id, pairData)}
+                </ul>
 
 
             </section>
