@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import SecretSantaContext from '../SecretSantaContext';
+import config from '../config';
 
 class Profile extends Component {
 
@@ -34,7 +35,7 @@ class Profile extends Component {
     }
 
     render() {
-        const { userInterests, id, pairData } = this.context.user;
+        const { userInterests, id, pairData, poolData } = this.context.user;
         return (
             <section>
                 <h1>Profile</h1>
@@ -63,6 +64,14 @@ class Profile extends Component {
                 <h3>Pairs</h3>
                 <ul>
                 {this.compareIdToParams(id, pairData)}
+                </ul>
+
+                <h3>Pools</h3>
+                <ul>
+                    {poolData.map((pool) => {
+                        let url = `/pairs/${pool.pool_id}`
+                        return <li key={pool.pool_id}><Link to={url}>{pool.pool_name}</Link></li>
+                    })}
                 </ul>
 
 

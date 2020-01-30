@@ -12,46 +12,55 @@ class Pairs extends Component {
     }
 
     componentDidMount() {
-        const {new_pool_id} = this.context
-        let url = `${config.API_ENDPOINT}/pairings/${new_pool_id}`
+        const { poolId } = this.props.match.params
+        let url = `${config.API_ENDPOINT}/pairings/${poolId}`
         fetch(url, {
             method: 'GET',
             headers: {
-                'content-type' : 'application/json'
+                'content-type': 'application/json'
             }
         })
-        .then(res => {
-            if (!res.ok) {
-                throw new Error('Something went wrong during Get Pairs')
-            }
-            return res.json();
-        })
-        .then(data => {
-            this.setState({
-                pairs: data
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error('Something went wrong during Get Pairs')
+                }
+                return res.json();
             })
-        })
-        .catch(error => {
-            this.setState({
-                error
+            .then(data => {
+                this.setState({
+                    pairs: data
+                })
             })
-        })
+            .catch(error => {
+                this.setState({
+                    error
+                })
+            })
     }
 
-render() {
+    verificationStatus = (boolean) => {
+        return (boolean) ? '\u2713' : '\u0058'
+     }
 
-    const { pairs } = this.state
-    console.log({pairs})
+    render() {
+
+        const { pairs } = this.state
+        console.log({ pairs })
 
 
-    return (
-        <section>
-            {pairs.map((user) => (
-                <li key={user.id}>{user.gifter} has: <span>{user.giftee}</span></li>
-            ))} 
-        </section>
-    )
-}
+        return (
+            <section>
+                {pairs.map((user) => (
+                    console.log(user),
+                    <li key={user.id}>
+                        <p>{user.gifter} has: <span>{user.giftee}</span>{' '}
+                        <span>{this.verificationStatus(user.confirmation)}</span>
+                        </p>
+                    </li>
+                ))}
+            </section>
+        )
+    }
 
 }
 

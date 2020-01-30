@@ -4,16 +4,16 @@ import config from '../config';
 class Verify extends Component {
 
     state = {
-        error: null
+        error: '',
+        confirmation: false
     }
 
     verificationStatus = (boolean) => {
-       return (boolean) ? `Confirmed` : `Not confirmed`
+       return (boolean) ? `You are now confirmed!` : `Enter Verification Code`
     }
 
     handleVerification = (code, e) => {
         e.preventDefault();
-        console.log(code)
         
         const pool_id = this.props.match.params.poolId;
 
@@ -29,13 +29,17 @@ class Verify extends Component {
         .then(res => {
             console.log(res)
             if (!res.ok) {
-                throw new Error (`Something went wrong during the PUT request`)
+                throw new Error (`Code does not exist`)
             }
             return res.json()
         })
         .then(status => {
-            console.log(status)
-            this.verificationStatus(true);
+            console.log({status})
+            if(status.confirmation) {
+                this.setState({
+                    confirmation: true
+                });
+            }
         })
         .catch(error => {
             this.setState({
@@ -45,8 +49,7 @@ class Verify extends Component {
     }
 
     render() {
-        const {error} = this.state
-        console.log(error)
+        const {error, confirmation} = this.state
         return (
             <div>
                 <form>
@@ -57,7 +60,8 @@ class Verify extends Component {
                         this.handleVerification(this.input.value, e)
                     }}>Verify</button>
                 </form>
-                {!!this.verificationStatus()}
+                {this.verificationStatus(confirmation)}
+                {error.toString()}
             </div>
         )
     }

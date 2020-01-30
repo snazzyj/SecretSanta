@@ -25,8 +25,7 @@ class App extends Component {
       pairData: [],
       userInterests: [],
       poolData: []
-    },
-    new_pool_id: null
+    }
   };
 
   componentDidMount() {
@@ -103,12 +102,6 @@ class App extends Component {
     })
 
     localStorage.removeItem('user')
-  }
-
-  setPoolId = pool_id => {
-    this.setState({
-      new_pool_id: pool_id
-    })
   }
 
   removeUserInterest = interest => {
@@ -192,7 +185,7 @@ class App extends Component {
       addUserInterest: this.addUserInterest
     }
 
-    // console.log(this.state.user)
+    console.log(this.state)
 
     return (
       <div className='App'>
@@ -204,11 +197,11 @@ class App extends Component {
           <main>
             <Switch>
               <Route exact path="/" component={Homepage} />
+              <Route path="/signup" component={SignUp} />
+              <Route path="/login" component={Login} />
               <Route path="/create" component={CreatePool} />
               <Route path="/pairs/:poolId" component={Pairs} />
-              <Route path="/signup" component={SignUp} />
               <Route path="/profile/:userId" component={Profile} />
-              <Route path="/login" component={Login} />
               <Route path="/verify/:poolId" component={Verify} />
             </Switch>
           </main>
