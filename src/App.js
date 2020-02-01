@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import './App.css';
 import config from './config';
 import CreatePool from './CreatePool/createpool';
@@ -185,10 +185,10 @@ class App extends Component {
       addUserInterest: this.addUserInterest
     }
 
-    console.log(this.state)
-
     return (
       <div className='App'>
+
+        <BrowserRouter>
 
         <SecretSantaContext.Provider value={contextValue}>
 
@@ -207,6 +207,8 @@ class App extends Component {
           </main>
 
         </SecretSantaContext.Provider>
+
+        </BrowserRouter>
       </div>
     );
   }
