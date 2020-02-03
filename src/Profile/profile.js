@@ -19,7 +19,7 @@ class Profile extends Component {
         this.context.removeUserInterest(interest)
     }
 
-    compareIdToParams = (id, giftee) => {
+    compareIdToParamsPairData = (id, giftee) => {
         let userId = id.toString()
         if(userId === this.props.match.params.userId) {
         return giftee.map((giftee, i) => {
@@ -29,6 +29,23 @@ class Profile extends Component {
         }) 
         } else {
             return "It wouldn't be very secretive to see these pairs"
+        }
+    }
+
+    compareIdToParamsPoolData = (id, poolData) => {
+        let userId = id.toString()
+
+        if(userId === this.props.match.params.userId) {
+
+            if(poolData.length === 0) {
+                return `You haven't created any pools`
+            }
+            return poolData.map((pool) => {
+                let url = `/pairs/${pool.pool_id}`
+                return <li key={pool.pool_id}><Link to={url}>{pool.pool_name}</Link></li>
+            })
+        } else {
+            return "It wouldn't be very secretive to see these pools"
         }
     }
 
@@ -61,15 +78,12 @@ class Profile extends Component {
                 </ul>
                 <h3>Pairs</h3>
                 <ul>
-                {this.compareIdToParams(id, pairData)}
+                {this.compareIdToParamsPairData(id, pairData)}
                 </ul>
 
                 <h3>Pools</h3>
                 <ul>
-                    {poolData.map((pool) => {
-                        let url = `/pairs/${pool.pool_id}`
-                        return <li key={pool.pool_id}><Link to={url}>{pool.pool_name}</Link></li>
-                    })}
+                    {this.compareIdToParamsPoolData(id, poolData)}
                 </ul>
 
 

@@ -50,11 +50,7 @@ class Pairs extends Component {
      }
 
     render() {
-
         const { pairs } = this.state
-        console.log({ pairs })
-
-
         return (
             <section>
                 {pairs.map((user) => (
