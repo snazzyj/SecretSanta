@@ -22,7 +22,6 @@ class Login extends Component {
             password: password.value
         })
             .then(res => {
-                console.log(res)
                 const { user } = res;
                 this.context.setUserLogin(user)
                 this.props.history.push('/')
@@ -43,9 +42,9 @@ class Login extends Component {
 
                 <form onSubmit={this.handleSubmit}>
                     <label htmlFor="email">Email</label>
-                    <input name="email" />
+                    <input name="email" type="email" required/>
                     <label htmlFor="password">Password</label>
-                    <input name="password" />
+                    <input name="password" type="password" required />
                     <button type="submit">Submit</button>
                 </form>
                 {this.state.error}
