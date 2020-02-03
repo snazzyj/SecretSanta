@@ -30,6 +30,13 @@ class Pairs extends Component {
                 this.setState({
                     pairs: data
                 })
+
+                data.forEach(pair => {
+                    if(pair.id === this.context.user.id) {
+                        this.context.setPairData(pair)
+                    }
+                })
+
             })
             .catch(error => {
                 this.setState({
@@ -51,7 +58,6 @@ class Pairs extends Component {
         return (
             <section>
                 {pairs.map((user) => (
-                    console.log(user),
                     <li key={user.id}>
                         <p>{user.gifter} has: <span>{user.giftee}</span>{' '}
                         <span>{this.verificationStatus(user.confirmation)}</span>

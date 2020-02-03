@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import SecretSantaContext from '../SecretSantaContext';
-import config from '../config';
 
 class Profile extends Component {
 
@@ -23,7 +22,6 @@ class Profile extends Component {
     compareIdToParams = (id, giftee) => {
         let userId = id.toString()
         if(userId === this.props.match.params.userId) {
-            console.log(giftee)
         return giftee.map((giftee, i) => {
             let id = giftee.giftee_id.toString()
 

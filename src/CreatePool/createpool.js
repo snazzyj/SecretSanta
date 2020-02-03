@@ -72,11 +72,11 @@ class CreatePool extends Component {
         const { users, pool_name } = this.state
         const { email } = this.context.user
         users.splice(0, 1)
-        console.log({users})
         CreatePoolService.postUsers(users)
         CreatePoolService.postPoolData(users, pool_name, email)
         .then(poolIdNumber => {
             const {pool_id} = poolIdNumber
+            this.context.setPoolData(pool_name, pool_id)
             this.props.history.push(`/pairs/${pool_id}`)
         })
     }

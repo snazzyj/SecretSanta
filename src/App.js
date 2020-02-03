@@ -51,6 +51,37 @@ class App extends Component {
     })
   }
 
+  setPoolData = (pool_name, pool_id) => {
+    this.setState({
+      user: {
+        ...this.state.user,
+        poolData: [
+          ...this.state.user.poolData,
+          {
+            pool_id,
+            pool_name
+          }
+        ]
+      }
+    })
+  }
+
+  setPairData = pair => {
+    const {giftee, giftee_id} = pair;
+    this.setState({
+      user: {
+        ...this.state.user,
+        pairData: [
+          ...this.state.user.pairData,
+          {
+            giftee,
+            giftee_id
+          }
+        ]
+      }
+    })
+  }
+
   setUserLogin = user => {
     this.setState({
       user: {
@@ -66,6 +97,24 @@ class App extends Component {
 
     localStorage.setItem('user', JSON.stringify(this.state.user))
   }
+
+  setUserLogout = () => {
+    this.setState({
+      user: {
+        name: '',
+        email: '',
+        isLoggedIn: false,
+        id: '',
+        pool_id: [],
+        userInterests: [],
+        pairData: [],
+        poolData: []
+      }
+    })
+
+    localStorage.removeItem('user')
+  }
+
 
   getInterest = (email) => {
     fetch(`${url}/interests/${email}`, {
@@ -86,24 +135,6 @@ class App extends Component {
         })
       })
   }
-
-  setUserLogout = () => {
-    this.setState({
-      user: {
-        name: '',
-        email: '',
-        isLoggedIn: false,
-        id: '',
-        pool_id: [],
-        userInterests: [],
-        pairData: [],
-        poolData: []
-      }
-    })
-
-    localStorage.removeItem('user')
-  }
-
   removeUserInterest = interest => {
     const { email } = this.state.user
 
@@ -176,37 +207,39 @@ class App extends Component {
     const contextValue = {
       users: this.state.users,
       user: this.state.user,
-      new_pool_id: this.state.new_pool_id,
       setPool: this.setPool,
+      setPoolData: this.setPoolData,
+      setPairData: this.setPairData,
       setUserLogin: this.setUserLogin,
       setUserLogout: this.setUserLogout,
-      setPoolId: this.setPoolId,
       removeUserInterest: this.removeUserInterest,
       addUserInterest: this.addUserInterest
     }
+
+    console.log(this.state.user)
 
     return (
       <div className='App'>
 
         <BrowserRouter>
 
-        <SecretSantaContext.Provider value={contextValue}>
+          <SecretSantaContext.Provider value={contextValue}>
 
-          <NavBar />
+            <NavBar />
 
-          <main>
-            <Switch>
-              <Route exact path="/" component={Homepage} />
-              <Route path="/signup" component={SignUp} />
-              <Route path="/login" component={Login} />
-              <Route path="/create" component={CreatePool} />
-              <Route path="/pairs/:poolId" component={Pairs} />
-              <Route path="/profile/:userId" component={Profile} />
-              <Route path="/verify/:poolId" component={Verify} />
-            </Switch>
-          </main>
+            <main>
+              <Switch>
+                <Route exact path="/" component={Homepage} />
+                <Route path="/signup" component={SignUp} />
+                <Route path="/login" component={Login} />
+                <Route path="/create" component={CreatePool} />
+                <Route path="/pairs/:poolId" component={Pairs} />
+                <Route path="/profile/:userId" component={Profile} />
+                <Route path="/verify/:poolId" component={Verify} />
+              </Switch>
+            </main>
 
-        </SecretSantaContext.Provider>
+          </SecretSantaContext.Provider>
 
         </BrowserRouter>
       </div>
