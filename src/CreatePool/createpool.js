@@ -66,7 +66,7 @@ class CreatePool extends Component {
         })
     }
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         event.preventDefault();
 
         const { users, pool_name } = this.state
@@ -90,7 +90,7 @@ class CreatePool extends Component {
             <div>
 
                 <h1>Create Pool</h1>
-                <form onSubmit={this.handleSubmit.bind(this)} >
+                <form onSubmit={this.handleSubmit} >
                     <label htmlFor="Pool__Name">Pool Name</label>
                     <input type="text" onChange={e => this.handlePoolName(e)} required/>
                     <div>

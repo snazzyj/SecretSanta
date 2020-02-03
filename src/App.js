@@ -216,8 +216,6 @@ class App extends Component {
       addUserInterest: this.addUserInterest
     }
 
-    console.log(this.state.user)
-
     return (
       <div className='App'>
 
