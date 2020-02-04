@@ -1,4 +1,4 @@
 export default {
-    API_ENDPOINT: process.env.REACT_APP_API_BASE_URL,
+    API_ENDPOINT: 'https://warm-spire-44026.herokuapp.com/api',
     TOKEN_KEY: 'secret-santa-auth-token'
 }

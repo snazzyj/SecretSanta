@@ -38,7 +38,4 @@ const AuthApiService = {
     }
   }
   
-  export default AuthApiService
-  
-  
-  // 'Authorization' : `Bearer ${token}`
+export default AuthApiService
