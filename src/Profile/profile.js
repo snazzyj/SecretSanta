@@ -83,7 +83,7 @@ class Profile extends Component {
                 ))
             }
         } else {
-            fetch(`${config.API_ENDPOINT}/interests/${id}`, {
+            fetch(`${config.API_ENDPOINT}/interests/${this.props.match.params.userId}`, {
                 method: 'GET',
             })
             .then(res => {
