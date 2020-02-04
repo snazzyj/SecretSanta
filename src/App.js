@@ -90,7 +90,7 @@ class App extends Component {
         isLoggedIn: true,
         id: user.id,
         pairData: user.pairData,
-        userInterests: this.getInterest(user.email),
+        userInterests: this.getInterest(user.id),
         poolData: user.poolData
       }
     })
@@ -117,7 +117,7 @@ class App extends Component {
 
 
   getInterest = (email) => {
-    fetch(`${url}/interests/${email}`, {
+    fetch(`${url}/interests/${id}`, {
       method: 'GET'
     })
       .then(res => {
@@ -136,7 +136,7 @@ class App extends Component {
       })
   }
   removeUserInterest = interest => {
-    const { email } = this.state.user
+    const { id } = this.state.user
 
     this.setState({
       user: {
@@ -147,7 +147,7 @@ class App extends Component {
       }
     })
 
-    fetch(`${url}/interests/${email}`, {
+    fetch(`${url}/interests/${id}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -170,8 +170,8 @@ class App extends Component {
   }
 
   addUserInterest = (interest) => {
-    const { email } = this.state.user
-    let newInterest = { interest, email }
+    const { id } = this.state.user
+    let newInterest = { interest, id }
 
     this.setState({
       user: {
@@ -180,7 +180,7 @@ class App extends Component {
       }
     })
 
-    fetch(`${url}/interests/${email}`, {
+    fetch(`${url}/interests/${id}`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
