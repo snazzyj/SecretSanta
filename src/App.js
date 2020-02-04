@@ -116,7 +116,7 @@ class App extends Component {
   }
 
 
-  getInterest = (email) => {
+  getInterest = (id) => {
     fetch(`${url}/interests/${id}`, {
       method: 'GET'
     })
@@ -187,7 +187,7 @@ class App extends Component {
       },
       body: JSON.stringify({
         interest,
-        email
+        id
       })
     })
       .then(res => {
