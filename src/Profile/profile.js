@@ -71,15 +71,17 @@ class Profile extends Component {
         let userId = id.toString();
 
         if (userId === this.props.match.params.userId) {
-            return userInterests.map((interest, i) => (
-                <li key={`${interest}${i}`}>
-                    {interest.interest}
-                    <a href="/" onClick={(e) => {
-                        e.preventDefault();
-                        this.removeUserInterest(interest);
-                    }}>(X)</a>
-                </li>
-            ))
+            if(userInterests !== undefined) {
+                return userInterests.map((interest, i) => (
+                    <li key={`${interest}${i}`}>
+                        {interest.interest}
+                        <a href="/" onClick={(e) => {
+                            e.preventDefault();
+                            this.removeUserInterest(interest);
+                        }}>(X)</a>
+                    </li>
+                ))
+            }
         } else {
             fetch(`${config.API_ENDPOINT}/interests/${id}`, {
                 method: 'GET',
@@ -92,7 +94,6 @@ class Profile extends Component {
                 return res.json()
             })
             .then(userInt => {
-                console.log({userInt})
                 return userInt.map((interest, i) => (
                     <li key={`${interest}${i}`}>
                         {interest.interest}
