@@ -150,7 +150,7 @@ class Profile extends Component {
                 <section className="interestSection">
                     {this.compareIdToParamsAddUserInterests(id)}
                     <h3>Interests</h3>
-                    <ul>
+                    <ul className="userInterests">
                         {this.displayInterests(userInt, id, userInterests)}
                     </ul>
                 </section>
