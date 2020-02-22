@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SecretSantaContext from '../SecretSantaContext';
+import './pairs.css'
 import config from '../config';
 
 class Pairs extends Component {
@@ -56,8 +57,11 @@ class Pairs extends Component {
                 <ul>
                 {pairs.map((user) => (
                     <li key={user.id}>
-                        <p>{user.gifter} has: <span>{user.giftee}</span>{' '}
-                        </p>
+                        <p>
+                            {user.gifter} has: 
+                            <span>{user.giftee}
+                            </span>
+                            </p>
                         <p className="confirmationStatus">Confirmed? {this.verificationStatus(user.confirmation)}</p>
                     </li>
                 ))}
