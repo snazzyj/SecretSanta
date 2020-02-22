@@ -53,6 +53,7 @@ class Pairs extends Component {
         const { pairs } = this.state
         return (
             <section className="pairsList">
+                <ul>
                 {pairs.map((user) => (
                     <li key={user.id}>
                         <p>{user.gifter} has: <span>{user.giftee}</span>{' '}
@@ -60,6 +61,7 @@ class Pairs extends Component {
                         <p className="confirmationStatus">Confirmed? {this.verificationStatus(user.confirmation)}</p>
                     </li>
                 ))}
+                </ul>
             </section>
         )
     }
