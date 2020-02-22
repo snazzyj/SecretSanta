@@ -1,0 +1,41 @@
+.burger-menu,
+.burger-menu.open {
+  display: inline-block;
+  cursor: pointer;
+  position: fixed;
+  right: 3px;
+  top: 3px;
+  z-index: 9999;
+  background: #fff;
+  padding: 10px;
+  border-radius: 25px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.burger-menu .bar1,
+.bar2,
+.bar3 {
+  width: 25px;
+  height: 3px;
+  background-color: #ff0505;
+  margin: 4px 0;
+  transition: 0.4s;
+}
+
+
+.mobileNav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+}
+
+.secretsanta, .createpool, .profile, .login {
+    display: inline-block;
+    color: #ff0505;
+}
+
+.mobileNav > a:hover {
+    background-color: #ff0505;
+    color: white;
+}

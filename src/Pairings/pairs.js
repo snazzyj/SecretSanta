@@ -52,12 +52,12 @@ class Pairs extends Component {
     render() {
         const { pairs } = this.state
         return (
-            <section>
+            <section className="pairsList">
                 {pairs.map((user) => (
                     <li key={user.id}>
                         <p>{user.gifter} has: <span>{user.giftee}</span>{' '}
-                        <span>{this.verificationStatus(user.confirmation)}</span>
                         </p>
+                        <p className="confirmationStatus">Confirmed? {this.verificationStatus(user.confirmation)}</p>
                     </li>
                 ))}
             </section>

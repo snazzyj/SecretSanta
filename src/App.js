@@ -6,6 +6,7 @@ import CreatePool from './CreatePool/createpool';
 import SignUp from './Signup/signup';
 import Profile from './Profile/profile';
 import NavBar from './Nav/navbar';
+import MobileNav from './mobileNav/mobile';
 import Pairs from './Pairings/pairs';
 import Login from './Login/login';
 import Homepage from './HomePage/homepage';
@@ -26,15 +27,24 @@ class App extends Component {
       pairData: [],
       userInterests: [],
       poolData: []
-    }
+    },
+    isSmallScreen: false
   };
 
   componentDidMount() {
     const user = JSON.parse(localStorage.getItem('user'))
+    let mediaQuery = window.matchMedia('(max-width: 520px)')
 
     if (user) {
       this.setState({
         user
+      })
+    }
+
+    if(mediaQuery.matches) {
+      this.setState({
+        ...this.state,
+        isSmallScreen: true
       })
     }
   }
@@ -217,6 +227,8 @@ class App extends Component {
       addUserInterest: this.addUserInterest
     }
 
+    const {isSmallScreen} = this.state
+
     return (
       <div className='App'>
 
@@ -224,7 +236,13 @@ class App extends Component {
 
           <SecretSantaContext.Provider value={contextValue}>
 
-            <NavBar />
+            {isSmallScreen ? (
+              <MobileNav />
+              ) : (
+              <NavBar />
+              )}
+
+
             <Snow />
 
             <main>

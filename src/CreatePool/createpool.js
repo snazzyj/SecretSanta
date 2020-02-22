@@ -67,9 +67,13 @@ class CreatePool extends Component {
 
         const { users, pool_name } = this.state
         const { email } = this.context.user
-        users.splice(0, 1)
-        CreatePoolService.postUsers(users)
-        CreatePoolService.postPoolData(users, pool_name, email)
+        let userList = users.filter(user => {
+            if(user.name !== "") {
+                return user
+            }
+        })
+        CreatePoolService.postUsers(userList)
+        CreatePoolService.postPoolData(userList, pool_name, email)
         .then(poolIdNumber => {
             const {pool_id} = poolIdNumber
             this.context.setPoolData(pool_name, pool_id)
@@ -83,19 +87,23 @@ class CreatePool extends Component {
         const {error} = this.state;
 
         return (
-            <div>
+            <section className="poolForm">
 
-                <h1>Create Pool</h1>
+                <h1 className="header">Create Pool</h1>
                 <form onSubmit={this.handleSubmit} >
+                    <div className="poolName">
                     <label htmlFor="Pool__Name">Pool Name</label>
                     <input type="text" onChange={e => this.handlePoolName(e)} required/>
+                    </div>
                     {this.createUI()}
+                    <div className="bottomBtns">
                     <input type="submit" value="Get Pairs" className="getPairsButton"/>
                     <input type="button" value="Add More" onClick={() => this.addField()} className="addMorePairs"/>
+                    </div>
                 </form>
 
                 <p>{error}</p>
-            </div>
+            </section>
         )
     }
 
