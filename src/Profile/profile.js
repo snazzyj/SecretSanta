@@ -81,9 +81,9 @@ class Profile extends Component {
                     <label htmlFor="addInterest">Add Interests</label>
                     <input className="addInterests" name="addInterest" ref={HTMLInputElement => this.input = HTMLInputElement} />
 
-                    <button className="addInterestBtn" onClick={(e) => {
+                    <button className="addInterestBtn plus" onClick={(e) => {
                         this.addUserInterest(this.input.value, e)
-                    }}>+</button>
+                    }}></button>
                 </form>
             )
         }
@@ -148,11 +148,11 @@ class Profile extends Component {
                 <h1 className="profileHeader">Profile</h1>
 
                 <section className="interestSection">
-                    {this.compareIdToParamsAddUserInterests(id)}
                     <h3>Interests</h3>
                     <ul className="userInterests">
                         {this.displayInterests(userInt, id, userInterests)}
                     </ul>
+                    {this.compareIdToParamsAddUserInterests(id)}
                 </section>
                 <section className="pairSection">
                     <h3>Pairs</h3>
