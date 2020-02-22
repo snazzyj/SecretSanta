@@ -7,6 +7,21 @@ Creating and organizing a Secret Santa event has never been easier. Sign up with
 
 # Screenshots
 **Home** :
-https://github.com/snazzyj/SecretSanta/blob/master/images/secretsantahome.png
-![alt text](https://github.com/snazzyj/SecretSanta/blob/master/images/secretsantahome.png "Home Page")
+![alt text](https://github.com/snazzyj/SecretSanta/blob/master/images/secretsantahome.png "Home Page")\
 
+**Create a Pool**:
+![alt text](https://github.com/snazzyj/SecretSanta/blob/master/images/secretsantacreate.png "Create A Pool")
+
+**Pairs**:
+![alt text](https://github.com/snazzyj/SecretSanta/blob/master/images/secretsantapairs.png "Pairs")
+
+**Profile**:
+![alt text](https://github.com/snazzyj/SecretSanta/blob/master/images/secretsantaprofile.png "Profile")
+
+**Verification**:
+![alt text](https://github.com/snazzyj/SecretSanta/blob/master/images/secretsantaverify.png "Verification")
+
+# Built With
+1. React
+2. JavaScript
+3. CSS
