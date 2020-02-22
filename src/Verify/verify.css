@@ -1,0 +1,51 @@
+.verifySection {
+    width: 33%;
+    background-color: white;
+    color: red;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+}
+
+.verifyForm > label {
+    font-weight: bold;
+}
+
+.verifyForm > input {
+    width: 88%;
+    margin: 4px 0;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.confirmBtn {
+    width: 94%;
+    padding: 4px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.confirmBtn:hover {
+    background-color: red;
+    color: white;
+}
+
+@media only screen and (max-width: 1000px) {
+    .verifySection {
+        width: 50%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .verifySection {
+        width: 65%;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .verifySection {
+        width: 90%;
+        margin-top: 100px;
+    }
+}

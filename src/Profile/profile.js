@@ -2,13 +2,22 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import SecretSantaContext from '../SecretSantaContext';
 import config from '../config';
+import './profile.css'
+
+const snowflake = '❆';
 
 class Profile extends Component {
 
+    state = {
+        userInt: []
+    }
+
     static contextType = SecretSantaContext;
 
-    componentDidUpdate(prevState) {
-        if (this.context.user.userInterests !== prevState.userInterests) { }
+    componentDidUpdate(prevProps) {
+        if (this.props.match.params.userId !== prevProps.match.params.userId) {
+            this.getUserInterest(this.props.match.params.userId)
+        }
     }
 
     addUserInterest = (interest, e) => {
@@ -56,76 +65,94 @@ class Profile extends Component {
         if (userId === this.props.match.params.userId) {
             return (
                 <form>
-                    <label>Add Interests</label>
-                    <input ref={HTMLInputElement => this.input = HTMLInputElement} />
+                    <label htmlFor="addInterest">Add Interests</label>
+                    <input className="addInterests" name="addInterest" ref={HTMLInputElement => this.input = HTMLInputElement} />
 
-                    <button onClick={(e) => {
+                    <button className="addInterestBtn" onClick={(e) => {
                         this.addUserInterest(this.input.value, e)
-                    }}>Add</button>
+                    }}>+</button>
                 </form>
             )
         }
     }
 
-    compareIdToParamsUserInterest = (id, userInterests) => {
-        let userId = id.toString();
-
-        if (userId === this.props.match.params.userId) {
-            if(userInterests !== undefined) {
-                return userInterests.map((interest, i) => (
-                    <li key={`${interest}${i}`}>
+    displayInterests = (interestsList, id, userInterests) => {
+        let userId = id.toString()
+        if (userId === this.props.match.params.userId && userInterests.length !== 0) {
+            return userInterests.map((interest, i) => (
+                <li key={`${interest.interest}${i}`}>
+                    <p>
+                        {snowflake}
+                        {' '}
                         {interest.interest}
-                        <a href="/" onClick={(e) => {
-                            e.preventDefault();
-                            this.removeUserInterest(interest);
-                        }}>(X)</a>
-                    </li>
-                ))
-            }
+                    </p>
+                    <span>{' '}</span>
+                    <a href="/" onClick={(e) => {
+                        e.preventDefault();
+                        this.removeUserInterest(interest);
+                    }}>X</a>
+                </li>
+            ))
+        } else if (userId !== this.props.match.params.userId && interestsList.length !== 0) {
+            return interestsList.map((interest, i) => (
+                <li key={`${interest.interest}${i}`}>
+                    <p>
+                        {snowflake}
+                        {' '}
+                        {interest.interest}
+                    </p>
+                </li>
+            ))
         } else {
-            fetch(`${config.API_ENDPOINT}/interests/${this.props.match.params.userId}`, {
-                method: 'GET',
-            })
+            return 'No interests to show'
+        }
+    }
+
+    getUserInterest = (id) => {
+        fetch(`${config.API_ENDPOINT}/interests/${id}`, {
+            method: 'GET',
+        })
             .then(res => {
                 if (!res.ok) {
-                    throw new Error (`Something went wrong`)
+                    throw new Error(`Something went wrong`)
                 }
 
                 return res.json()
             })
             .then(userInt => {
-                return userInt.map((interest, i) => (
-                    <li key={`${interest}${i}`}>
-                        {interest.interest}
-                    </li>
-                ))
+                this.setState({
+                    userInt
+                })
             })
-        }
     }
 
     render() {
         const { userInterests, id, pairData, poolData } = this.context.user;
+        const { userInt } = this.state
+
         return (
-            <section>
-                <h1>Profile</h1>
+            <section className="profileSection">
+                <h1 className="profileHeader">Profile</h1>
 
-
-                {this.compareIdToParamsAddUserInterests(id)}
-                <h3>Interests</h3>
-                <ul>
-                    {this.compareIdToParamsUserInterest(id, userInterests)}
-                </ul>
-                <h3>Pairs</h3>
-                <ul>
-                    {this.compareIdToParamsPairData(id, pairData)}
-                </ul>
-
-                <h3>Pools</h3>
-                <ul>
-                    {this.compareIdToParamsPoolData(id, poolData)}
-                </ul>
-
-
+                <section className="interestSection">
+                    {this.compareIdToParamsAddUserInterests(id)}
+                    <h3>Interests</h3>
+                    <ul>
+                        {this.displayInterests(userInt, id, userInterests)}
+                    </ul>
+                </section>
+                <section className="pairsSection">
+                    <h3>Pairs</h3>
+                    <ul>
+                        {this.compareIdToParamsPairData(id, pairData)}
+                    </ul>
+                </section>
+                <section className="poolSection">
+                    <h3>Pools</h3>
+                    <ul>
+                        {this.compareIdToParamsPoolData(id, poolData)}
+                    </ul>
+                </section>
             </section>
 
         )

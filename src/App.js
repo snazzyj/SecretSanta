@@ -10,6 +10,7 @@ import Pairs from './Pairings/pairs';
 import Login from './Login/login';
 import Homepage from './HomePage/homepage';
 import Verify from './Verify/verify';
+import Snow  from './Snow/snow';
 import SecretSantaContext from './SecretSantaContext';
 const url = config.API_ENDPOINT;
 
@@ -224,6 +225,7 @@ class App extends Component {
           <SecretSantaContext.Provider value={contextValue}>
 
             <NavBar />
+            <Snow />
 
             <main>
               <Switch>

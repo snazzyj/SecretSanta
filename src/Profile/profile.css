@@ -1,0 +1,145 @@
+@import url('https://fonts.googleapis.com/css?family=Acme&display=swap'); 
+
+.profileSection {
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: auto;
+    flex-wrap: wrap;
+    width: 90%;
+}
+
+.profileHeader { 
+    width: 100%;
+    font-size: 36px;
+}
+
+.interestSection, .pairSection, .poolSection {
+    width: 30%;
+    background-color: white;
+    color: red;
+    margin-left: auto;
+    margin-right: auto;
+    font-family: 'Acme', sans-serif;
+    font-size: 20px;
+}
+
+.addInterests {
+    padding: 4px;
+    margin-right: 3px;
+    background-color: lightgray;
+}
+
+.addInterestBtn{
+    border: 1px solid #aaa;
+    box-shadow: inset 1px 1px 3px #fff;
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+    position: relative;
+    margin: 4px;
+    display: inline-block;
+    vertical-align: middle;
+    background: #aaaaaa4f;
+}
+.addInterestBtn:hover{
+    background: radial-gradient(#aaa, #fff);
+}
+.addInterestBtn:active{
+    background: #6363634f;
+}
+.addInterestBtn:before,
+.addInterestBtn:after{
+    content:'';position:absolute;top:0;left:0;right:0;bottom:0;
+}
+
+.addInterestBtn.plus:before,
+.addInterestBtn.plus:after {
+    background:green;
+    box-shadow: 1px 1px 1px #ffffff9e;
+}
+.addInterestBtn.plus:before{
+    width: 2px;
+    margin: 3px auto;
+}
+.addInterestBtn.plus:after{
+    margin: auto 3px;
+    height: 2px;
+    box-shadow: none;
+}
+
+.userInterests {
+    list-style-type: none;
+    padding: 0;
+}
+
+.userInterests > li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+    width: 75%;
+}
+.interestSection > form > label {
+    font-weight: bold;
+}
+
+.interestSection > form {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.pairSection > h3 {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.poolSection > ul, .pairSection > ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: red;
+    font-size: 24px;
+}
+
+a:hover {
+    color: black;
+}
+
+.pairSection > h3, .interestSection > h3, .poolSection > h3 {
+    text-decoration: underline;
+}
+
+@media only screen and (max-width: 1170px) {
+    .interestSection, .pairSection, .poolSection {
+        width: 45%;
+        margin-bottom: 10px;
+    }
+}
+
+@media only screen and (max-width: 830px) {
+    .interestSection, .pairSection, .poolSection {
+        width: 55%;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .interestSection, .pairSection, .poolSection {
+        width: 70%;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .interestSection, .pairSection, .poolSection {
+        width: 90%;
+    }
+} 

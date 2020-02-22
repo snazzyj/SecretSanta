@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link } from 'react-router-dom';
+import './homepage.css'
 import SecretSantaContext from '../SecretSantaContext';
 
 class Homepage extends Component {
@@ -9,10 +10,10 @@ class Homepage extends Component {
     setHello = (user) => {
         if(user.isLoggedIn) {
             return (
-                <h2>Welcome, {user.name}</h2>
+                <h1>Welcome, {user.name}</h1>
             )
         } else {
-            return ''
+            return <p className="notLoggedIn"></p>
         }
     }
 
@@ -27,9 +28,9 @@ class Homepage extends Component {
                 {this.setHello(user)}
             </header>
 
-            <section>
-                <Link to="/create">Create a Pool</Link>
-                <Link to="/signup">Sign Up</Link>
+            <section className="mainSelection">
+                <Link to="/create" className="createpoolBox">Create a Pool</Link>
+                <Link to="/signup" className="signup">Sign Up</Link>
             </section>
 
             </div>

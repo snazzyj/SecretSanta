@@ -51,12 +51,12 @@ class Verify extends Component {
     render() {
         const {error, confirmation} = this.state
         return (
-            <div>
-                <form>
+            <div className="verifySection">
+                <form className="verifyForm">
                     <label></label>
                     <input ref={HTMLInputElement => this.input = HTMLInputElement} />
 
-                    <button onClick={(e) => {
+                    <button className="confirmBtn" onClick={(e) => {
                         this.handleVerification(this.input.value, e)
                     }}>Verify</button>
                 </form>

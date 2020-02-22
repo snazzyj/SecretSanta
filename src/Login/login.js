@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SecretSantaContext from '../SecretSantaContext';
 import AuthApiService from '../services/auth-api-service';
+import './login.css'
 
 class Login extends Component {
 
@@ -37,15 +38,15 @@ class Login extends Component {
     render() {
 
         return (
-            <div>
-                <p>Login</p>
+            <div className="loginSection">
+                <h1>Login</h1>
 
-                <form onSubmit={this.handleSubmit}>
+                <form className="loginForm" onSubmit={this.handleSubmit}>
                     <label htmlFor="email">Email</label>
                     <input name="email" type="email" required/>
                     <label htmlFor="password">Password</label>
                     <input name="password" type="password" required />
-                    <button type="submit">Submit</button>
+                    <button className="loginBtn" type="submit">Login</button>
                 </form>
                 {this.state.error}
             </div>

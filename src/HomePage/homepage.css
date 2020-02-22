@@ -1,0 +1,49 @@
+.mainSelection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.createpoolBox, .signup {
+    font-size: 26px;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 200px 100px;
+    width: 100px;
+    display: inline-block;
+    text-align: center;
+    color: #ff0505;
+    background-color: white;
+}
+
+.createpoolBox:hover, .signup:hover {
+    /* background-color: rgb(85, 0, 0); */
+    background-color: #850000;
+    color: white;
+}
+
+.createpoolBox {
+    margin-right: 5px;
+}
+
+.signup {
+    margin-left: 5px;
+}
+
+
+
+@media only screen and (max-width: 620px) {
+    .createpoolBox {
+        margin-left: 5px;
+        margin-bottom: 5px;
+        padding: 150px 100px;
+    }
+
+    .signup {
+        margin-right: 5px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        padding: 150px 100px;
+    }
+}

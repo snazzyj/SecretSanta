@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import AuthApiService from '../services/auth-api-service';
+import './signup.css'
 
 const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i); // eslint-disable-line
 const validPasswordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
@@ -89,13 +90,12 @@ class SignUp extends Component {
     render() {
         const { errors } = this.state;
         return (
-            <div>
+            <div className="signupSection">
 
-                <p>Already have an account? <Link to="/login">Login</Link></p>
 
                 <h1>Sign up</h1>
 
-                <form onSubmit={this.handleSubmit}>
+                <form className="signupForm" onSubmit={this.handleSubmit}>
                     <label htmlFor="name">Name</label>
                     <input type="text" name="name" required />
 
@@ -109,9 +109,10 @@ class SignUp extends Component {
                     {errors.password.length > 0 &&
                         <span>{errors.password}</span>}
 
-                    <button>Submit</button>
+                    <button className="signupBtn">Submit</button>
 
                 </form>
+                        <p>Already have an account? <Link to="/login">Login</Link></p>
             </div>
         )
     }

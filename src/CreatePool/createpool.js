@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import SecretSantaContext from '../SecretSantaContext';
 import CreatePoolService from './createpool-service';
-
-const Required = () => (
-    <span className='required'>*</span>
-)
-
+import './createpool.css'
 
 class CreatePool extends Component {
 
@@ -27,12 +23,12 @@ class CreatePool extends Component {
     createUI = () => {
         return this.state.users.map((_, i) => (
             i = 1 + i, // eslint-disable-line
-            <div key={i}>{i}
+            <div key={i} className="formInput">{i}
                 <label htmlFor="name"></label>
-                <input name="name" onChange={(e) => this.handleInputChange(i, e)} />
+                <input id="name" name="name" onChange={(e) => this.handleInputChange(i, e)} placeholder="Name"/>
                 <label htmlFor="email"></label>
-                <input name="email" onChange={(e) => this.handleInputChange(i, e)} />
-                <input type="button" value="Remove" onClick={(i) => this.removeField(i)} />
+                <input id="email" name="email" onChange={(e) => this.handleInputChange(i, e)} placeholder="Email" />
+                <input type="button" value="Remove" onClick={(i) => this.removeField(i)} className="removeButton"/>
             </div>
         ))
     };
@@ -93,14 +89,9 @@ class CreatePool extends Component {
                 <form onSubmit={this.handleSubmit} >
                     <label htmlFor="Pool__Name">Pool Name</label>
                     <input type="text" onChange={e => this.handlePoolName(e)} required/>
-                    <div>
-                        <p>Name{''}<Required /></p>
-
-                        <p>Email</p>
-                    </div>
                     {this.createUI()}
-                    <input type="button" value="Add More" onClick={() => this.addField()} />
-                    <input type="submit" value="Get Pairs" />
+                    <input type="submit" value="Get Pairs" className="getPairsButton"/>
+                    <input type="button" value="Add More" onClick={() => this.addField()} className="addMorePairs"/>
                 </form>
 
                 <p>{error}</p>

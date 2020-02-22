@@ -1,0 +1,138 @@
+.header {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.poolForm {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.poolName {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+}
+
+.poolName > label {
+    font-size: 22px;
+}
+
+.poolName > input {
+    width: 25%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 8px;
+    font-weight: bold;
+}
+
+.formInput {
+    margin-top: 4px;
+    margin-bottom: 8px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 1px solid white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#name, #email {
+    width: 33%;
+    padding: 10px;
+}
+
+.removeButton {
+    padding: 4px;
+}
+
+input{
+    margin-left: 5px;
+}
+
+.getPairsButton {
+    width: 50%;
+}
+
+
+@media only screen and (max-width: 1350px) {
+    .poolForm {
+        width: 55%;
+    }
+}
+
+@media only screen and (max-width: 960px) {
+    .poolForm {
+        width: 65%;
+    }
+}
+
+@media only screen and (max-width: 760px) {
+    .poolForm {
+        width: 75%;
+    }
+}
+
+@media only screen and (max-width: 630px) {
+    .poolForm {
+        width: 75%;
+    }
+
+    .poolName > input {
+        width: 40%;
+    }
+
+    .formInput {
+        justify-content: flex-start;
+        padding-left: 10px;
+    }
+
+    #name, #email {
+        width: 66%;
+    }
+
+    #email {
+        margin-left: 10px;
+    }
+
+    .removeButton {
+        margin-left: 20px;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+    .poolForm {
+        width: 90%;
+    }
+
+    .poolName > input {
+        width: 50%
+    }
+
+    .formInput {
+        padding-top: 10px;
+    }
+
+}
+
+@media only screen and (max-width: 400px) {
+
+    .formInput {
+        align-items: center;
+    }
+
+    #email, #name {
+        width: 60%;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    #email {
+        margin-left: 10px;
+    }
+}

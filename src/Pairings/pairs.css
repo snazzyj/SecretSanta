@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Acme&display=swap'); 
+
+.pairsList > ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+}
+
+.pairsList {
+    font-size: 22px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.pairsList > ul > li {
+    border: 1px solid white;
+    padding: 10px;
+    margin: 10px;
+    width: 25%;
+    font-family: 'Acme', sans-serif;
+}
+
+@media only screen and (max-width: 670px) {
+    .pairsList {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+
+    .pairsList > ul {
+        margin-top: 50px;
+    }
+
+    .pairsList > ul > li {
+        width: 35%;
+    }
+}
