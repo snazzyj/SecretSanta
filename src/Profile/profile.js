@@ -35,7 +35,15 @@ class Profile extends Component {
             return giftee.map((giftee, i) => {
                 let id = giftee.giftee_id.toString()
 
-                return <li key={i}><Link to={id} key={i}>{giftee.giftee}</Link></li>
+                return <li key={i}><Link to={id} key={i}><p>
+                    {snowflake}
+                    {' '}
+                    {giftee.giftee}
+                    <span>{' '}</span>
+                    </p>
+                    
+                    </Link></li>
+                    
             })
         } else {
             return "It wouldn't be very secretive to see these pairs"
@@ -52,7 +60,12 @@ class Profile extends Component {
             }
             return poolData.map((pool) => {
                 let url = `/pairs/${pool.pool_id}`
-                return <li key={pool.pool_id}><Link to={url}>{pool.pool_name}</Link></li>
+                return <li key={pool.pool_id}><Link to={url}><p>
+                    {snowflake}
+                    {' '}
+                    {pool.pool_name}
+                    </p>
+                    </Link></li>
             })
         } else {
             return "It wouldn't be very secretive to see these pools"
