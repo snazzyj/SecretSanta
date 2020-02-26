@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {Link } from 'react-router-dom';
-import './homepage.css'
+import Demo from '../demo/demo'
 import SecretSantaContext from '../SecretSantaContext';
+import './homepage.css'
 
 class Homepage extends Component {
 
@@ -33,8 +34,10 @@ class Homepage extends Component {
                 {!isLoggedIn && 
                 <Link to="/signup" className="signup">Sign Up</Link>
                 }
+
             </section>
 
+                <Demo />
             </div>
         )
     }
