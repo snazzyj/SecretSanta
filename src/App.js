@@ -23,7 +23,7 @@ class App extends Component {
       name: '',
       email: '',
       id: '',
-      isLoggedIn: true,
+      isLoggedIn: false,
       pairData: [],
       userInterests: [],
       poolData: []
