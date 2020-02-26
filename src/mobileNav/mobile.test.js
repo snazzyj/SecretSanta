@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Mobile from './mobile.js';
 import App from '../App';
 
-describe("Test", () => {
+describe("Mobile NavBar Component", () => {
     beforeAll(() => {  
       Object.defineProperty(window, "matchMedia", {
         value: jest.fn(() => { 

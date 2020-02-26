@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Profile from './Profile';
 import App from '../App';
 
-describe("Test", () => {
+describe("Profile Component", () => {
     beforeAll(() => {  
       Object.defineProperty(window, "matchMedia", {
         value: jest.fn(() => { 

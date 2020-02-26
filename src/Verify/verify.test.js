@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Verify from './verify.js';
 import App from '../App';
 
-describe("Test", () => {
+describe("Verify Component", () => {
     beforeAll(() => {  
       Object.defineProperty(window, "matchMedia", {
         value: jest.fn(() => { 

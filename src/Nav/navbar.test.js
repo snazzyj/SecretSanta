@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import NavBar from './navbar.js';
 import App from '../App';
 
-describe("Test", () => {
+describe("Navbar Component", () => {
     beforeAll(() => {  
       Object.defineProperty(window, "matchMedia", {
         value: jest.fn(() => { 

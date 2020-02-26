@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
-describe("Test", () => {
+describe("App Component", () => {
   beforeAll(() => {  
     Object.defineProperty(window, "matchMedia", {
       value: jest.fn(() => { 
