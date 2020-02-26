@@ -17,7 +17,7 @@ const AuthApiService = {
     )
     .then((data) => {
       const {authToken} = data;
-      TokenService.saveAuthToken(authToken)
+      TokenService.saveAuthToken(authToken);
       return data;
     })
     },
@@ -33,7 +33,7 @@ const AuthApiService = {
         (!res.ok)
         ? res.json().then(e => Promise.reject(e))
         : res.json()
-      })
+      });
       
     }
   }

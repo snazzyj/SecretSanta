@@ -14,13 +14,13 @@ class Homepage extends Component {
             )
         } else {
             return <p className="notLoggedIn"></p>
-        }
+        };
     }
 
     render() {
 
         const {user} = this.context;
-
+        const {isLoggedIn} = this.context.user;
         return (
             <div>
 
@@ -30,7 +30,9 @@ class Homepage extends Component {
 
             <section className="mainSelection">
                 <Link to="/create" className="createpoolBox">Create a Pool</Link>
+                {!isLoggedIn && 
                 <Link to="/signup" className="signup">Sign Up</Link>
+                }
             </section>
 
             </div>

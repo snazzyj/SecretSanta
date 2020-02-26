@@ -17,6 +17,7 @@ class CreatePool extends Component {
             }],
             pool_name: '',
             error: null,
+            disabled: false
         };
     }
 
@@ -28,7 +29,9 @@ class CreatePool extends Component {
                 <input id="name" name="name" onChange={(e) => this.handleInputChange(i, e)} placeholder="Name"/>
                 <label htmlFor="email"></label>
                 <input id="email" name="email" onChange={(e) => this.handleInputChange(i, e)} placeholder="Email" />
-                <input type="button" value="Remove" onClick={(i) => this.removeField(i)} className="removeButton"/>
+                <button onClick={(i) => this.removeField(i)} className="removeButton">
+                    Remove
+                </button>
             </div>
         ))
     };
@@ -36,7 +39,7 @@ class CreatePool extends Component {
     addField = () => {
         this.setState(prevState => ({
             users: [...prevState.users, { name: "", email: "" }]
-        }))
+        }));
     }
 
     removeField = (i) => {
@@ -44,7 +47,7 @@ class CreatePool extends Component {
         users.splice(i, 1)
         this.setState({
             users
-        })
+        });
     }
 
     handleInputChange = (i, e) => {
@@ -53,34 +56,39 @@ class CreatePool extends Component {
         users[i] = { ...users[i], [name]: value };
         this.setState({
             users
-        })
+        });
     }
 
     handlePoolName = e => {
         this.setState({
             pool_name: e.target.value
-        })
+        });
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
-
         const { users, pool_name } = this.state
         const { email } = this.context.user
         let userList = users.filter(user => {
-            if(user.name !== "") {
-                return user
-            }
-        })
-        CreatePoolService.postUsers(userList)
+            return user.name !== "";
+        });
+        CreatePoolService.postUsers(userList);
         CreatePoolService.postPoolData(userList, pool_name, email)
         .then(poolIdNumber => {
             const {pool_id} = poolIdNumber
             this.context.setPoolData(pool_name, pool_id)
             this.props.history.push(`/pairs/${pool_id}`)
-        })
+        });
     }
 
+    handleClick = (e) => {
+        if (this.state.disabled) {
+            return;
+        }
+        this.setState({
+            disabled: true
+        })
+    }
 
     render() {
 
@@ -90,15 +98,20 @@ class CreatePool extends Component {
             <section className="poolForm">
 
                 <h1 className="header">Create Pool</h1>
-                <form onSubmit={this.handleSubmit} >
+                <form>
                     <div className="poolName">
                     <label htmlFor="Pool__Name">Pool Name</label>
                     <input type="text" onChange={e => this.handlePoolName(e)} required/>
                     </div>
                     {this.createUI()}
                     <div className="bottomBtns">
-                    <input type="submit" value="Get Pairs" className="getPairsButton"/>
-                    <input type="button" value="Add More" onClick={() => this.addField()} className="addMorePairs"/>
+                    <button type="submit" className="getPairsButton" onClick={(e) => {this.handleClick(); this.handleSubmit(e)}} disabled={this.state.disabled}>
+                        {this.state.disabled ? 'Fetching Pair Data' : 'Get Pairs'}
+                    </button>
+
+                    <button onClick={() => this.addField()} className="addMorePairs">
+                        Add More
+                    </button>
                     </div>
                 </form>
 

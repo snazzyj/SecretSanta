@@ -17,13 +17,16 @@ class NavBar extends Component {
     render() {
 
         const userId = this.context.user.id;
+        const {isLoggedIn} = this.context.user;
         return(
             <nav className="navbar">
                 <Link to="/" className="secretsanta">Secret Santa</Link>
                 <span> </span>
                 <Link to="/create" className="createpool">Create a Pool</Link>
                 <span> </span>
+                {isLoggedIn && (
                 <Link to={`/profile/${userId}`} className="profile">Profile</Link>
+                )}
                 <span> </span>
                 {TokenService.hasAuthToken()
                 ? <Link onClick={this.handleLogoutClick} to='/' className="login">Logout</Link>

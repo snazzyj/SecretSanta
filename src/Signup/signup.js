@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import AuthApiService from '../services/auth-api-service';
 import './signup.css'
 
@@ -32,12 +32,12 @@ class SignUp extends Component {
                 validEmailRegex.test(value)
                     ? ''
                     : 'Email is not valid!';
-        }
+        };
 
         this.setState({
             errors,
             [name]: value
-        })
+        });
     }
 
     handlePassword = (event) => {
@@ -47,21 +47,21 @@ class SignUp extends Component {
 
         if (name === 'password') {
             errors.password =
-            validPasswordRegex.test(value)
+                validPasswordRegex.test(value)
                     ? ''
                     : 'Must contain a Number, Upper case letter, Lower case letter and be 6 to 20 characters long'
-        }
+        };
 
         this.setState({
             errors,
             [name]: value
-        })
+        });
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
 
-        const {name, email, password} = e.target
+        const { name, email, password } = e.target
 
         this.setState({
             error: null
@@ -72,17 +72,17 @@ class SignUp extends Component {
             email: email.value,
             password: password.value
         })
-        .then(user => {
-            name.value = ''
-            email.value = ''
-            password.val = ''
-            this.props.history.push('/login')
-        })
-        .catch(res => {
-            this.setState({
-                error: res.error
+            .then(user => {
+                name.value = ''
+                email.value = ''
+                password.val = ''
+                this.props.history.push('/login')
+            })
+            .catch(res => {
+                this.setState({
+                    error: res.error
+                });
             });
-        })
 
     }
 
@@ -101,18 +101,26 @@ class SignUp extends Component {
 
                     <label htmlFor="email">Email</label>
                     <input type="email" name="email" required onChange={this.handleEmail} />
-                    {errors.email.length > 0 &&
-                        <span>{errors.email}</span>}
 
                     <label htmlFor="password">Password</label>
                     <input type="password" name="password" required onChange={this.handlePassword} />
-                    {errors.password.length > 0 &&
-                        <span>{errors.password}</span>}
+                    <div className="errors">
+                        <p>
+                            {errors.email.length > 0 &&
+                                <span>{errors.email}</span>}
+
+                        </p>
+                        <p>
+
+                            {errors.password.length > 0 &&
+                                <span>{errors.password}</span>}
+                        </p>
+                    </div>
 
                     <button className="signupBtn">Submit</button>
 
                 </form>
-                        <p>Already have an account? <Link to="/login">Login</Link></p>
+                <p>Already have an account? <Link to="/login">Login</Link></p>
             </div>
         )
     }

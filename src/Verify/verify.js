@@ -9,7 +9,7 @@ class Verify extends Component {
     }
 
     verificationStatus = (boolean) => {
-       return (boolean) ? `You are now confirmed!` : `Enter Verification Code`
+       return (boolean) ? `You are now confirmed!` : `Enter Verification Code`;
     }
 
     handleVerification = (code, e) => {
@@ -27,14 +27,12 @@ class Verify extends Component {
             })
         })
         .then(res => {
-            console.log(res)
             if (!res.ok) {
                 throw new Error (`Code does not exist`)
             }
             return res.json()
         })
         .then(status => {
-            console.log({status})
             if(status.confirmation) {
                 this.setState({
                     confirmation: true
@@ -45,11 +43,11 @@ class Verify extends Component {
             this.setState({
                 error
             })
-        })
+        });
     }
 
     render() {
-        const {error, confirmation} = this.state
+        const {error, confirmation} = this.state;
         return (
             <div className="verifySection">
                 <form className="verifyForm">

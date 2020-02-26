@@ -9,7 +9,7 @@ class Login extends Component {
         super(props);
         this.state = {
             error: ''
-        }
+        };
     }
     static contextType = SecretSantaContext;
 
@@ -31,7 +31,7 @@ class Login extends Component {
                 this.setState({
                     error
                 })
-            })
+            });
 
     }
 

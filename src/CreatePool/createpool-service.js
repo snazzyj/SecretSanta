@@ -1,6 +1,5 @@
 import config from '../config';
 const usersUrl = `${config.API_ENDPOINT}/users`;
-// const poolsUrl = `${config.API_ENDPOINT}/pools`;
 const pairsUrl = `${config.API_ENDPOINT}/pairings`;
 
 const CreatePoolService = {
@@ -25,8 +24,8 @@ const CreatePoolService = {
                 return data;
             })
             .catch(error => {
-                console.log(error)
-            })
+                alert(error)
+            });
 
     },
     postPoolData(users, pool_name, admin_email) {
@@ -51,8 +50,8 @@ const CreatePoolService = {
             return data;
         })
         .catch(error => {
-            console.log(error)
-        })
+            alert(error)
+        });
     }
 }
 

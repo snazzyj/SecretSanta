@@ -23,7 +23,7 @@ class App extends Component {
       name: '',
       email: '',
       id: '',
-      isLoggedIn: false,
+      isLoggedIn: true,
       pairData: [],
       userInterests: [],
       poolData: []
@@ -39,27 +39,27 @@ class App extends Component {
       this.setState({
         user
       })
-    }
+    };
 
     if(mediaQuery.matches) {
       this.setState({
         ...this.state,
         isSmallScreen: true
       })
-    }
+    };
   }
 
   componentDidUpdate(prevState) {
     if (this.state.user !== prevState.user) {
       localStorage.setItem('user', JSON.stringify(this.state.user))
-    }
+    };
   }
 
 
   setPool = users => {
     this.setState({
       users
-    })
+    });
   }
 
   setPoolData = (pool_name, pool_id) => {
@@ -74,7 +74,7 @@ class App extends Component {
           }
         ]
       }
-    })
+    });
   }
 
   setPairData = pair => {
@@ -90,7 +90,7 @@ class App extends Component {
           }
         ]
       }
-    })
+    });
   }
 
   setUserLogin = user => {
@@ -104,9 +104,9 @@ class App extends Component {
         userInterests: this.getInterest(user.id),
         poolData: user.poolData
       }
-    })
+    });
 
-    localStorage.setItem('user', JSON.stringify(this.state.user))
+    localStorage.setItem('user', JSON.stringify(this.state.user));
   }
 
   setUserLogout = () => {
@@ -121,9 +121,9 @@ class App extends Component {
         pairData: [],
         poolData: []
       }
-    })
+    });
 
-    localStorage.removeItem('user')
+    localStorage.removeItem('user');
   }
 
 
@@ -143,8 +143,8 @@ class App extends Component {
             ...this.state.user,
             userInterests: res
           }
-        })
-      })
+        });
+      });
   }
   removeUserInterest = interest => {
     const { id } = this.state.user
@@ -156,7 +156,7 @@ class App extends Component {
           return item !== interest
         })
       }
-    })
+    });
 
     fetch(`${url}/interests/${id}`, {
       method: 'DELETE',
@@ -177,7 +177,7 @@ class App extends Component {
         this.setState({
           error
         })
-      })
+      });
   }
 
   addUserInterest = (interest) => {
@@ -227,7 +227,7 @@ class App extends Component {
       addUserInterest: this.addUserInterest
     }
 
-    const {isSmallScreen} = this.state
+    const {isSmallScreen} = this.state;
 
     return (
       <div className='App'>

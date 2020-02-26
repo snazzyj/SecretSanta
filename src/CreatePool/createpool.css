@@ -59,6 +59,12 @@ input{
     width: 50%;
 }
 
+.bottomBtns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
 
 @media only screen and (max-width: 1350px) {
     .poolForm {

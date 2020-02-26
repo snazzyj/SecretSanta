@@ -16,17 +16,17 @@ class Profile extends Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.match.params.userId !== prevProps.match.params.userId) {
-            this.getUserInterest(this.props.match.params.userId)
-        }
+            this.getUserInterest(this.props.match.params.userId);
+        };
     }
 
     addUserInterest = (interest, e) => {
         e.preventDefault();
-        this.context.addUserInterest(interest)
+        this.context.addUserInterest(interest);
     }
 
     removeUserInterest = interest => {
-        this.context.removeUserInterest(interest)
+        this.context.removeUserInterest(interest);
     }
 
     compareIdToParamsPairData = (id, giftee) => {
@@ -47,7 +47,7 @@ class Profile extends Component {
             })
         } else {
             return "It wouldn't be very secretive to see these pairs"
-        }
+        };
     }
 
     compareIdToParamsPoolData = (id, poolData) => {
@@ -69,7 +69,7 @@ class Profile extends Component {
             })
         } else {
             return "It wouldn't be very secretive to see these pools"
-        }
+        };
     }
 
     compareIdToParamsAddUserInterests = (id) => {
@@ -86,7 +86,7 @@ class Profile extends Component {
                     }}></button>
                 </form>
             )
-        }
+        };
     }
 
     displayInterests = (interestsList, id, userInterests) => {
@@ -105,7 +105,7 @@ class Profile extends Component {
                         this.removeUserInterest(interest);
                     }}>X</a>
                 </li>
-            ))
+            ));
         } else if (userId !== this.props.match.params.userId && interestsList.length !== 0) {
             return interestsList.map((interest, i) => (
                 <li key={`${interest.interest}${i}`}>
@@ -118,7 +118,7 @@ class Profile extends Component {
             ))
         } else {
             return 'No interests to show'
-        }
+        };
     }
 
     getUserInterest = (id) => {
@@ -136,12 +136,12 @@ class Profile extends Component {
                 this.setState({
                     userInt
                 })
-            })
+            });
     }
 
     render() {
         const { userInterests, id, pairData, poolData } = this.context.user;
-        const { userInt } = this.state
+        const { userInt } = this.state;
 
         return (
             <section className="profileSection">

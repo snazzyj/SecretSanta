@@ -13,8 +13,8 @@ class Pairs extends Component {
     }
 
     componentDidMount() {
-        const { poolId } = this.props.match.params
-        let url = `${config.API_ENDPOINT}/pairings/${poolId}`
+        const { poolId } = this.props.match.params;
+        let url = `${config.API_ENDPOINT}/pairings/${poolId}`;
         fetch(url, {
             method: 'GET',
             headers: {
@@ -30,28 +30,28 @@ class Pairs extends Component {
             .then(data => {
                 this.setState({
                     pairs: data
-                })
+                });
 
                 data.forEach(pair => {
                     if(pair.id === this.context.user.id) {
                         this.context.setPairData(pair)
                     }
-                })
+                });
 
             })
             .catch(error => {
                 this.setState({
                     error
                 })
-            })
+            });
     }
 
     verificationStatus = (boolean) => {
-        return (boolean) ? '\u2713' : '\u0058'
+        return (boolean) ? '\u2713' : '\u0058';
      }
 
     render() {
-        const { pairs } = this.state
+        const { pairs } = this.state;
         return (
             <section className="pairsList">
                 <ul>
