@@ -31,6 +31,10 @@
     color: white;
 }
 
+.verifySection > p {
+    font-size: 20px;
+}
+
 @media only screen and (max-width: 1000px) {
     .verifySection {
         width: 50%;

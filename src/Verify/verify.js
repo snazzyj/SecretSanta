@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import config from '../config';
+import './verify.css'
 
 class Verify extends Component {
 
@@ -50,6 +51,7 @@ class Verify extends Component {
         const {error, confirmation} = this.state;
         return (
             <div className="verifySection">
+                <p>{this.verificationStatus(confirmation)}</p>
                 <form className="verifyForm">
                     <label></label>
                     <input ref={HTMLInputElement => this.input = HTMLInputElement} />
@@ -58,7 +60,6 @@ class Verify extends Component {
                         this.handleVerification(this.input.value, e)
                     }}>Verify</button>
                 </form>
-                {this.verificationStatus(confirmation)}
                 {error.toString()}
             </div>
         )
