@@ -68,11 +68,13 @@ class Mobile extends Component {
                     <nav className="mobileNav">
                         <Link to="/" onClick={this.closeNavBar} className="secretsanta">Secret Santa</Link>
                         <span> </span>
+                        {isLoggedIn && 
                         <Link to="/create" onClick={this.closeNavBar} className="createpool">Create a Pool</Link>
+                        &&
                         <span> </span>
-                        {isLoggedIn && (
-                            <Link to={`/profile/${userId}`} onClick={this.closeNavBar} className="profile">Profile</Link>
-                        )}
+                        &&
+                        <Link to={`/profile/${userId}`} onClick={this.closeNavBar} className="profile">Profile</Link>
+                        }
                         <span> </span>
                         {TokenService.hasAuthToken()
                             ? <Link onClick={() => {

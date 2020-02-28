@@ -22,11 +22,13 @@ class NavBar extends Component {
             <nav className="navbar">
                 <Link to="/" className="secretsanta">Secret Santa</Link>
                 <span> </span>
+                {isLoggedIn && 
                 <Link to="/create" className="createpool">Create a Pool</Link>
+                &&
                 <span> </span>
-                {isLoggedIn && (
+                &&
                 <Link to={`/profile/${userId}`} className="profile">Profile</Link>
-                )}
+                }
                 <span> </span>
                 {TokenService.hasAuthToken()
                 ? <Link onClick={this.handleLogoutClick} to='/' className="login">Logout</Link>
