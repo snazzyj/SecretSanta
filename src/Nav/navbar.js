@@ -24,9 +24,9 @@ class NavBar extends Component {
                 <span> </span>
                 {isLoggedIn && 
                 <Link to="/create" className="createpool">Create a Pool</Link>
-                &&
+                }
                 <span> </span>
-                &&
+                {isLoggedIn &&
                 <Link to={`/profile/${userId}`} className="profile">Profile</Link>
                 }
                 <span> </span>
