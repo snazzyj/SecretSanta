@@ -29,6 +29,7 @@ class Profile extends Component {
         this.context.removeUserInterest(interest);
     }
 
+    //compares user Id to Params to see if the profile is the users or not
     compareIdToParamsPairData = (id, giftee) => {
         let userId = id.toString();
         if (userId === this.props.match.params.userId) {
@@ -50,6 +51,7 @@ class Profile extends Component {
         };
     }
 
+    //compares user Id to Params to see if the profile is the users or not
     compareIdToParamsPoolData = (id, poolData) => {
         let userId = id.toString();
 
@@ -72,6 +74,7 @@ class Profile extends Component {
         };
     }
 
+    //compares user Id to Params to see if the profile is the users or not
     compareIdToParamsAddUserInterests = (id) => {
         let userId = id.toString();
 
@@ -89,6 +92,8 @@ class Profile extends Component {
         };
     }
 
+    //used to render the user interests
+    //if the user id and the params id matches, it will render the delete button
     displayInterests = (interestsList, id, userInterests) => {
         let userId = id.toString()
         if (userId === this.props.match.params.userId && userInterests.length !== 0) {

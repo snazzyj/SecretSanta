@@ -31,6 +31,8 @@ class App extends Component {
     isSmallScreen: false
   };
 
+  //checks to see if the user is on a mobile view or desktop
+  //sets state based on that response
   componentDidMount() {
     const user = JSON.parse(localStorage.getItem('user'))
     let mediaQuery = window.matchMedia('(max-width: 520px)')
@@ -93,6 +95,7 @@ class App extends Component {
     });
   }
 
+  //sets state after the user has logged in
   setUserLogin = user => {
     this.setState({
       user: {
@@ -109,6 +112,7 @@ class App extends Component {
     localStorage.setItem('user', JSON.stringify(this.state.user));
   }
 
+  //clears state and local storage on logout
   setUserLogout = () => {
     this.setState({
       user: {
@@ -126,7 +130,7 @@ class App extends Component {
     localStorage.removeItem('user');
   }
 
-
+  //fetch request to get user interests
   getInterest = (id) => {
     fetch(`${url}/interests/${id}`, {
       method: 'GET'
@@ -146,6 +150,8 @@ class App extends Component {
         });
       });
   }
+
+  //removes user interest on click
   removeUserInterest = interest => {
     const { id } = this.state.user
 

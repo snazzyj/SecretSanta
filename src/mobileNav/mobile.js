@@ -19,6 +19,7 @@ class Mobile extends Component {
         document.removeEventListener("mousedown", this.handleClickOutside);
     }
 
+    //toggles the nav system
     toggleNav = () => {
 
         const { isOpen } = this.state
@@ -40,6 +41,7 @@ class Mobile extends Component {
         this.context.setUserLogout();
     }
 
+    //checks to see if the user clicked outside the navbar, if so, close it
     handleClickOutside = event => {
         if (this.container.current && !this.container.current.contains(event.target)) {
             this.setState({

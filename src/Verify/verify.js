@@ -13,6 +13,10 @@ class Verify extends Component {
        return (boolean) ? `You are now confirmed!` : `Enter Verification Code`;
     }
 
+    //sends patch req to api
+    //if the code matches, confirmation will be set to true
+    //verification status will change to confirmed on both the user end
+    //and within the pool status
     handleVerification = (code, e) => {
         e.preventDefault();
         

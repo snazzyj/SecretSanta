@@ -12,6 +12,7 @@ class Pairs extends Component {
         pairs: []
     }
 
+    //sets state on intial render
     componentDidMount() {
         const { poolId } = this.props.match.params;
         let url = `${config.API_ENDPOINT}/pairings/${poolId}`;
@@ -46,6 +47,10 @@ class Pairs extends Component {
             });
     }
 
+    //supplies a check mark or an X if the user
+    //has confirmed their status in the pool
+    //meaning they agreed to particapate
+    //not required to confirm
     verificationStatus = (boolean) => {
         return (boolean) ? '\u2713' : '\u0058';
      }
@@ -62,7 +67,7 @@ class Pairs extends Component {
                             <span>{user.giftee}
                             </span>
                             </p>
-                        <p className="confirmationStatus">Confirmed? {this.verificationStatus(user.confirmation)}</p>
+                        <p className="confirmationStatus">Has Confirmed Their Status? {this.verificationStatus(user.confirmation)}</p>
                     </li>
                 ))}
                 </ul>

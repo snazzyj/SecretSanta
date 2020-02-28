@@ -22,6 +22,7 @@ class SignUp extends Component {
         };
     }
 
+    //checks if the email is valid using the emailRegex on line 6
     handleEmail = (event) => {
         event.preventDefault();
         const { name, value } = event.target;
@@ -40,6 +41,7 @@ class SignUp extends Component {
         });
     }
 
+    //checks if the password is valid using the passwordRegex on line 7
     handlePassword = (event) => {
         event.preventDefault();
         const { name, value } = event.target;

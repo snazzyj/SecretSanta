@@ -21,6 +21,7 @@ class CreatePool extends Component {
         };
     }
 
+    //renders UI for each input needed
     createUI = () => {
         return this.state.users.map((_, i) => (
             i = 1 + i, // eslint-disable-line
@@ -50,6 +51,7 @@ class CreatePool extends Component {
         });
     }
 
+    //updates state based on user input
     handleInputChange = (i, e) => {
         const { name, value } = e.target;
         let users = [...this.state.users];
@@ -65,6 +67,10 @@ class CreatePool extends Component {
         });
     }
 
+    //sends 2 post requests
+    //1st to the users endpoint to post all users in the pool
+    //2nd goes to the poolData where the userlist, pool name and an admin_email is supplied
+    //then sets context and redirects to the pairs page where the user can view all pairs for that pool
     handleSubmit = (event) => {
         event.preventDefault();
         const { users, pool_name } = this.state
@@ -81,6 +87,7 @@ class CreatePool extends Component {
         });
     }
 
+    //disables the button after submitting to reduce re-submissions
     handleClick = (e) => {
         if (this.state.disabled) {
             return;
