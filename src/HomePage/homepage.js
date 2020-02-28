@@ -30,9 +30,10 @@ class Homepage extends Component {
             </header>
 
             <section className="mainSelection">
-                <Link to="/create" className="createpoolBox">Create a Pool</Link>
-                {!isLoggedIn && 
-                <Link to="/signup" className="signup">Sign Up</Link>
+               
+                {!isLoggedIn    
+                  ? <Link to="/signup" className="signup">Sign Up</Link>
+                  :  <Link to="/create" className="createpoolBox">Create a Pool</Link>
                 }
 
             </section>
