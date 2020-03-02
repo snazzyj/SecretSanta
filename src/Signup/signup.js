@@ -56,8 +56,9 @@ class SignUp extends Component {
 
         this.setState({
             errors,
-            [name]: value
+            [name]: value,
         });
+
     }
 
     handleSubmit = (e) => {
@@ -65,32 +66,41 @@ class SignUp extends Component {
 
         const { name, email, password } = e.target
 
-        this.setState({
-            error: null
-        });
-
-        AuthApiService.postUser({
-            name: name.value,
-            email: email.value,
-            password: password.value
-        })
-            .then(user => {
-                name.value = ''
-                email.value = ''
-                password.val = ''
-                this.props.history.push('/login')
-            })
-            .catch(res => {
-                this.setState({
-                    error: res.error
-                });
+        if(password.value.length >= 6) {
+            this.setState({
+                error: null
             });
+    
+            AuthApiService.postUser({
+                name: name.value,
+                email: email.value,
+                password: password.value
+            })
+                .then(user => {
+                    name.value = ''
+                    email.value = ''
+                    password.val = ''
+                    this.props.history.push('/login')
+                })
+                .catch(res => {
+                    this.setState({
+                        error: res.error
+                    });
+                });
+        } else {
+            this.setState({
+              error: 'Invalid Password'  
+            })
+        }
+
 
     }
 
 
     render() {
-        const { errors } = this.state;
+        const { errors, error, email, password } = this.state;
+        const isEnabled = email.length > 0 && password.length >= 6;
+        console.log(this.state)
         return (
             <div className="signupSection">
 
@@ -117,9 +127,10 @@ class SignUp extends Component {
                             {errors.password.length > 0 &&
                                 <span>{errors.password}</span>}
                         </p>
+                        <p>{error}</p>
                     </div>
 
-                    <button className="signupBtn">Submit</button>
+                    <button className="signupBtn" disabled={!isEnabled}>Sign Up</button>
 
                 </form>
                 <p>Already have an account? <Link to="/login">Login</Link></p>
