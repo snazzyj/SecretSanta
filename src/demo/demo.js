@@ -11,13 +11,13 @@ class Demo extends Component {
                         <li>Email: bar@gmail.com</li>
                         <li>Password: Password123</li>
                     </ul>
-                <ul>
-                    <li>❅ Register for an account or use the demo account ❅</li>
-                    <li>❅ Create a pool of people supplying both a name and an email ❅</li>
-                    <li>❅ A notification will be sent to each person within the pool informing them of who their partner is ❅</li>
-                    <li>❅ You, as the creator, will be able to see all pairs ❅</li>
-                    <li>❅ Going to the profile page will allow you to add your own interests and view who you have been paired up with ❅</li>
-                    <li>❅ If you have created a pool, you will be able to see that also ❅</li>
+                <ul className="steps">
+                    <li>❅ Register for an account or use the demo account</li>
+                    <li>❅ Create a pool of people supplying both a name and an email</li>
+                    <li>❅ A notification will be sent to each person within the pool informing them of who their partner is</li>
+                    <li>❅ You, as the creator, will be able to see all pairs</li>
+                    <li>❅ Going to the profile page will allow you to add your own interests and view who you have been paired up with</li>
+                    <li>❅ If you have created a pool, you will be able to see that also</li>
                 </ul>
             </div>
         )
