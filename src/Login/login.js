@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import SecretSantaContext from '../SecretSantaContext';
 import AuthApiService from '../services/auth-api-service';
 import './login.css'
@@ -49,6 +50,7 @@ class Login extends Component {
                     <button className="loginBtn" type="submit">Login</button>
                 </form>
                 {this.state.error}
+                <p>Don't have an account? <Link to="/signup">Sign Up!</Link></p>
             </div>
         )
     }
