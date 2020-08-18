@@ -1,6 +1,7 @@
 # Secret Santa
 # Demo
 ### [Live](https://secretsanta.snazzyj.now.sh/)
+### [API Documentation](https://github.com/snazzyj/SecretSanta-api)
 #### Demo account: 
 #### Email: bar@gmail.com
 #### Password: Password123
